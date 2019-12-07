@@ -9,7 +9,7 @@ body {
     flex-direction: column;
 }
 
-#neck {
+.neck-container {
     display: flex;
     flex-direction: column;
     height: 60vh;
