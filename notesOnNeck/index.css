@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #guitar-neck {
+    border-left: 6px double black;
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    margin: 25px;
+    max-height: 200px;
+    max-width: 70%;
+    width: 70%;
+  }
+  
+  .guitar-string {
+    background-color: #eaeaea;
+    display: flex;
+    height: 10vh;
+    width: 100%;
+  }
+  
+  .guitar-fret {
+      align-items: center;
+      background-color: #eaeaea;
+      border: 1px solid #a5a5a5;
+      display: flex;
+      height: 100%;
+      max-height: 15vh;
+      width: 100%;
+  }
