@@ -20,12 +20,21 @@ const getInstrumentStrings = (instrument, tuning) => {
 
 
 const drawNeck = (instrument, tuning, startFret, endFret) => {
-    const neck = document.querySelector('#neck2');
+    const neck = document.querySelector('#neck');
     const stringNames = getInstrumentStrings(instrument, tuning);
+    let stringName = '';
 
     // create strings
-    for(let i=0; i<stringNames.length; i++){
-        let stringName = stringNames[i];
+    for(let i=0; i<stringNames.length + 1; i++){
+        let strings = document.querySelectorAll('.string');
+
+        // invisible string first
+        if(strings.length === 0){
+            stringName = 'invisible-string';
+        } else {
+            stringName = stringNames[i-1];
+        }
+
         let string = drawString(stringName, startFret, endFret);
         
         //create frets
@@ -42,11 +51,16 @@ const drawNeck = (instrument, tuning, startFret, endFret) => {
     }
 };
 
-const drawString = (openNote, startFret, endFret) => {
+const drawString = (stringName, startFret, endFret) => {
     let string = document.createElement('div');
-
-    string.id = `${openNote}-string`;
     string.classList.add('string');
+
+    if(stringName == 'invisible-string'){
+        string.id = 'invisible-string';
+        string.classList.add('invisible-string');
+    } else {
+        string.id = `${stringName}-string`;
+    }
 
     return string
 };
@@ -59,10 +73,17 @@ const drawFret = (stringName, fretNumber) => {
     
     if(fretNumber === 0){
         fret.classList.add('open-fret');
+
+        if(stringName == 'invisible-string'){
+            fret.classList.add('invisible-open-fret');
+        }
     } else {
         fret.classList.add('fret');
+        if(stringName == 'invisible-string'){
+            fret.classList.add('invisible-fret');
+        }
     }
-    
+
     return fret
 };
 
@@ -73,5 +94,13 @@ const getFretNote = (stringName, fretNumber) => {
 
     return notes[(startNote + fretNumber) % 12]
 }
+
+const placeMarker = fret => {
+
+};
+
+const removeMarker = fret => {
+
+};
 
 drawNeck('guitar', 'standard', 0, 12);
