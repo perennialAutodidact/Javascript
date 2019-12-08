@@ -18,7 +18,6 @@ const getInstrumentStrings = (instrument, tuning) => {
     return instruments[instrument][tuning]
 };
 
-
 const drawNeck = (instrument, tuning, startFret, endFret) => {
     const neck = document.querySelector('#neck');
     const stringNames = getInstrumentStrings(instrument, tuning);
@@ -26,81 +25,98 @@ const drawNeck = (instrument, tuning, startFret, endFret) => {
 
     // create strings
     for(let i=0; i<stringNames.length + 1; i++){
-        let strings = document.querySelectorAll('.string');
-
-        // invisible string first
-        if(strings.length === 0){
-            stringName = 'invisible-string';
-        } else {
-            stringName = stringNames[i-1];
-        }
-
-        let string = drawString(stringName, startFret, endFret);
+        stringName = stringNames[i];
+        
+        let string = drawString(stringName, stringNames.length, startFret, endFret);
         
         //create frets
         for(let j=startFret; j<endFret; j++){
             let fretNumber = j;
-            let fret = drawFret(stringName, fretNumber);
+            let fret = drawFret(stringName, fretNumber, string);
 
             string.append(fret);
         }
-
+        
         console.log("");
         
         neck.prepend(string);
     }
 };
 
-const drawString = (stringName, startFret, endFret) => {
+const drawString = (stringName, totalStrings, startFret, endFret) => {
+    let strings = document.querySelectorAll('.string');
     let string = document.createElement('div');
     string.classList.add('string');
 
-    if(stringName == 'invisible-string'){
-        string.id = 'invisible-string';
+    string.id = `${stringName}-string`;
+
+    // console.log(strings);
+    
+    if(strings.length == 0 || strings.length == totalStrings){
         string.classList.add('invisible-string');
-    } else {
-        string.id = `${stringName}-string`;
     }
 
     return string
 };
 
-const drawFret = (stringName, fretNumber) => {
+const drawFret = (stringName, fretNumber, string) => {
+    let strings = document.querySelectorAll('.string');
     let fret = document.createElement('div');
     let fretNote = getFretNote(stringName, fretNumber);
 
     fret.id = fretNote;
     
-    if(fretNumber === 0){
+    if(fretNumber == 0){
         fret.classList.add('open-fret');
 
-        if(stringName == 'invisible-string'){
+        if(string.classList.contains('invisible-string')){
             fret.classList.add('invisible-open-fret');
         }
     } else {
         fret.classList.add('fret');
-        if(stringName == 'invisible-string'){
+        if(string.classList.contains('invisible-string')){
             fret.classList.add('invisible-fret');
         }
     }
+
 
     return fret
 };
 
 const getFretNote = (stringName, fretNumber) => {
-    const notes = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
+    const notes = ['C', 'Csharp-Dflat', 'D', 'Dsharp-Eflat', 'E', 'F', 'Fsharp-Gflat', 'G', 'Gsharp-Aflat', 'A', 'Asharp-Bflat', 'B'];
 
     let startNote = notes.indexOf(stringName);
 
     return notes[(startNote + fretNumber) % 12]
 }
 
-const placeMarker = fret => {
+const placeMarker = (string,fret) => {
 
+    let targetFrets = document.querySelectorAll(`#${string} #${fret}`);
+    
+    for(let i=0; i<targetFrets.length; i++){
+        let marker = document.createElement('div');
+        marker.classList.add('note-marker');
+        console.log(targetFrets[i]);
+        
+        targetFrets[i].append(marker);
+    }
 };
 
-const removeMarker = fret => {
+const removeMarker = (string,fret) => {
+    let markers = document.querySelectorAll(`#${string} #${fret} > .note-marker`);
 
+    for(let i=0; i<markers.length; i++){
+
+        markers[i].remove();
+    }
 };
 
-drawNeck('guitar', 'standard', 0, 12);
+
+
+drawNeck('guitar', 'standard', 0, 13);
+placeMarker('E-string', 'Fsharp-Gflat');
+removeMarker('E-string', 'Fsharp-Gflat');
+
+placeMarker('E-string', 'E')
