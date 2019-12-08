@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="./index.css">
 
+    <script src="./teoria/teoria-master/teoria.js"></script>
+
+
     <title>Document</title>
 </head>
 <body>
@@ -15,6 +18,37 @@
             <!-- build neck with JS -->
         </div>
 
+        <label for="scale-formulas">Scale:</label>
+        <select name="scales" id="scale-formulas">
+            <option value="ionian">Ionian</option>
+            <option value="dorian">Dorian</option>
+            <option value="phrygian">Phrygian</option>
+            <option value="lydian">Lydian</option>
+            <option value="mixolydian">Mixolydian</option>
+            <option value="aeolian">Aeolian</option>
+            <option value="locrian">Locrian</option>
+        </select>
+
+        <label for="key">Key:</label>
+        <select name="key" id="key">
+            <option value="C">C</option>
+            <option value="C#">C#</option>
+            <option value="Db">Db</option>
+            <option value="D">D</option>
+            <option value="D#">D#</option>
+            <option value="Eb">Eb</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="F#">F#</option>
+            <option value="Gb">Gb</option>
+            <option value="G">G</option>
+            <option value="G#">G#</option>
+            <option value="Ab">Ab</option>
+            <option value="A">A</option>
+            <option value="A#">A#</option>
+            <option value="Bb">Bb</option>
+            <option value="B">B</option>
+        </select>
     <!-- 
         completed instrument neck follows this pattern:
         <div class="neck-container" id="neck">
@@ -30,6 +64,7 @@
         </div> 
     -->
     
-    <script src="./index.js"></script>
+    <script src="./scalesToNeck.js"></script>
+    <script src="./buildNeck.js"></script>
 </body>
 </html>
