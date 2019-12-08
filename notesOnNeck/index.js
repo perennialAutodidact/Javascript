@@ -2,10 +2,10 @@
 const getInstrumentStrings = (instrument, tuning) => {
     const instruments = {
         'guitar': {
-            'standard': ['E','A','D','G','B','A'],
+            'standard': ['E','A','D','G','B','E'],
             'Drop-D': ['D','A','D','G','B','A'],
             'DAGGAD': ['D','A','D','G','A','D'],
-            'Open-D': ['D','A','D','F#','A','D'],
+            'Open-D': ['D','A','D','F#/Gb','A','D'],
         },
         'mandolin': {
             'standard': ['G','D','A','E'],
@@ -17,6 +17,7 @@ const getInstrumentStrings = (instrument, tuning) => {
 
     return instruments[instrument][tuning]
 };
+
 
 const drawNeck = (instrument, tuning, startFret, endFret) => {
     const neck = document.querySelector('#neck2');
@@ -31,8 +32,12 @@ const drawNeck = (instrument, tuning, startFret, endFret) => {
         for(let j=startFret; j<endFret; j++){
             let fretNumber = j;
             let fret = drawFret(stringName, fretNumber);
+
+            string.append(fret);
         }
 
+        console.log("");
+        
         neck.prepend(string);
     }
 };
@@ -47,15 +52,26 @@ const drawString = (openNote, startFret, endFret) => {
 };
 
 const drawFret = (stringName, fretNumber) => {
-
-
-
     let fret = document.createElement('div');
+    let fretNote = getFretNote(stringName, fretNumber);
+
+    fret.id = fretNote;
     
+    if(fretNumber === 0){
+        fret.classList.add('open-fret');
+    } else {
+        fret.classList.add('fret');
+    }
+    
+    return fret
 };
 
 const getFretNote = (stringName, fretNumber) => {
+    const notes = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
 
+    let startNote = notes.indexOf(stringName);
+
+    return notes[(startNote + fretNumber) % 12]
 }
 
 drawNeck('guitar', 'standard', 0, 12);
