@@ -10,13 +10,10 @@ class InstrumentFret {
         
         let fretName = this.getFretNote();
         newFret.setAttribute('name', fretName);
-        
+
         newFret.id = this.id;
 
         let lastString = this.string.neck.stringNames.length;
-
-        console.log(`lastString: ${lastString}`);
-        
 
         if(this.id == 0){
             newFret.classList.add('open-fret')
@@ -31,7 +28,6 @@ class InstrumentFret {
 
                 newFret.classList.add('regular-fret');
             }
-            
         }
 
         return newFret
