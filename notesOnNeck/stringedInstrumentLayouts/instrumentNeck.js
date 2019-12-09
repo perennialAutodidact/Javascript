@@ -6,12 +6,12 @@ class InstrumentNeck {
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12];
         this.container = document.querySelector('#neck');
-        this.stringNames = this.getInstrumentStringNames();
+        this.stringNames = this.getInstrumentTunings();
         this.totalStrings = this.stringNames.length;
         this.strings = this.drawStrings();
     }
 
-    getInstrumentStringNames() {
+    getInstrumentTunings(instrument='') {
         const instruments = {
             'guitar': {
                 'standard': ['E','A','D','G','B','E'],
@@ -27,8 +27,12 @@ class InstrumentNeck {
             }
         }
         
-        // Returns string names 
-        return instruments[this.instrument][this.tuning]
+        if(instrument == ''){
+            // Returns string names 
+            return instruments[this.instrument][this.tuning]
+        } else {
+            return instruments[instrument]
+        }
     };
     
     drawStrings(){
