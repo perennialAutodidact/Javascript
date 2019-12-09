@@ -1,24 +1,39 @@
 class InstrumentString{
-    constructor(stringNum, startFret, endFret){
+    constructor(neck, stringNum, stringName='invisible'){
+        this.neck = neck;
         this.id = stringNum;
-        this.startFret = startFret;
-        this.endFret = endFret;
+        this.name = stringName;
         this.container = this.draw();
-
-        console.log(this.container);
-        
+        this.frets = this.drawFrets();
     }
     
     draw(){
-        let container = document.createElement('div');
-        container.classList.add('string');
+        let totalStrings = this.neck.totalStrings;
+        let newString = document.createElement('div');
 
+        newString.id = this.id;
         
+        newString.setAttribute('name', this.name);
 
-        return container
+        newString.classList.add('string');
+        if(this.id == 0 || this.id == this.neck.totalStrings) {
+            newString.classList.add('invisible-string');
+        }
+
+        return newString
     }
 
     drawFrets() {
+        let frets = [];
+        for(let i=this.neck.startFret; i<this.neck.endFret; i++){
+            let fretNum = i;
+            let fret = new InstrumentFret(this, fretNum);
 
+            this.container.append(fret.container);
+
+            fret.draw();
+            frets.push(fret.container);
+        }
+        return frets
     };
 };

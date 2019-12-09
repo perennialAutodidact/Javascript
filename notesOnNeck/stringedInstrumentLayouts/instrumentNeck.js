@@ -6,6 +6,7 @@ class InstrumentNeck {
         this.endFret = endFret;
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentStringNames();
+        this.totalStrings = this.stringNames.length;
         this.strings = this.drawStrings();
     }
 
@@ -33,13 +34,12 @@ class InstrumentNeck {
         let strings = [];
         for(let i=0; i<this.stringNames.length + 1; i++){
             let stringNum = i;
-            let string = new InstrumentString(stringNum, this.startFret, this.endFret);
+            let string = new InstrumentString(this, stringNum, this.stringNames[i]);
 
-            this.container.append(string.container);
+            this.container.prepend(string.container);
             strings.push(string);
         }
 
         return strings
     }
-
 }

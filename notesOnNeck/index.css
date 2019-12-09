@@ -42,6 +42,9 @@ body {
     width: 100%;
 }
 
+.regular-fret {
+}
+
 .invisible-fret {
     background: none;
     border: none;
@@ -57,6 +60,7 @@ body {
 
 .invisible-open-fret {
     border: none;
+    width: 55vw;
 }
 
 .note-marker {
