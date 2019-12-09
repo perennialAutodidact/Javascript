@@ -2,7 +2,7 @@ class InstrumentFret {
     constructor(string, fretNum) {
         this.string = string;
         this.id = fretNum;
-        this.container = this.draw();
+        this.container = this.draw();        
     }
 
     draw() {
@@ -13,20 +13,24 @@ class InstrumentFret {
 
         newFret.id = this.id;
 
-        let lastString = this.string.neck.stringNames.length;
-
         if(this.id == 0){
             newFret.classList.add('open-fret')
             if(this.string.container.classList.contains('invisible-string')){
                 newFret.classList.add('invisible-open-fret');
+            } else {
+                newFret.classList.add('inlay-fret');
             }
         } else {
             newFret.classList.add('fret');
             if(this.string.container.classList.contains('invisible-string')){
                 newFret.classList.add('invisible-fret');
             } else {
-
                 newFret.classList.add('regular-fret');
+                if(this.string.neck.inlays.includes(parseInt(newFret.id))){
+                    console.log('called');
+                    
+                    newFret.classList.add('inlay-fret');
+                }
             }
         }
 

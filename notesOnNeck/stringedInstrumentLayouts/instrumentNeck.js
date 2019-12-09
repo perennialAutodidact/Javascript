@@ -4,6 +4,7 @@ class InstrumentNeck {
         this.tuning = tuning;
         this.startFret = startFret;
         this.endFret = endFret;
+        this.inlays = [3,5,7,9,12];
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentStringNames();
         this.totalStrings = this.stringNames.length;

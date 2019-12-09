@@ -18,6 +18,6 @@ const removeMarker = (string='all',fret='all') => {
     }
 };
 
-const neck = new InstrumentNeck('mandolin', 'standard', 0, 13);
+const neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
 console.log(neck);
