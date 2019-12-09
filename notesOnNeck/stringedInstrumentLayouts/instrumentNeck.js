@@ -30,10 +30,6 @@ class InstrumentNeck {
     };
     
     drawStrings(){
-
-        console.log(this.startFret);
-        
-
         let strings = [];
         for(let i=0; i<this.stringNames.length + 1; i++){
             let stringNum = i;
