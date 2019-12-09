@@ -1,5 +1,15 @@
-function InstrumentNeck(instrument, tuning, ){
-    this.getInstrumentStringNames = function(instrument, tuning) {
+class InstrumentNeck {
+    constructor(instrument, tuning, startFret, endFret){
+        this.instrument = instrument;
+        this.tuning = tuning;
+        this.startFret = startFret;
+        this.endFret = endFret;
+        this.container = document.querySelector('#neck');
+        this.stringNames = this.getInstrumentStringNames();
+        this.strings = this.drawStrings();
+    }
+
+    getInstrumentStringNames() {
         const instruments = {
             'guitar': {
                 'standard': ['E','A','D','G','B','E'],
@@ -15,22 +25,25 @@ function InstrumentNeck(instrument, tuning, ){
             }
         }
         
-        // Returns string names
-        
-        return instruments[instrument][tuning]
+        // Returns string names 
+        return instruments[this.instrument][this.tuning]
     };
     
-    this.instrument = instrument;
-    this.tuning = tuning;
-    this.container = document.querySelector('#neck');
-    this.stringNames = this.getInstrumentStringNames(this.instrument, this.tuning);
+    drawStrings(){
 
-    this.drawStrings = function(){
-        for(let i=0; i<this.stringNames.length + 1; i++){
-            
-        }
-        let string = new InstrumentString(stringNum, startFret, endFret);
-        console.log(string);
+        console.log(this.startFret);
         
+
+        let strings = [];
+        for(let i=0; i<this.stringNames.length + 1; i++){
+            let stringNum = i;
+            let string = new InstrumentString(stringNum, this.startFret, this.endFret);
+
+            this.container.append(string.container);
+            strings.push(string);
+        }
+
+        return strings
     }
+
 }
