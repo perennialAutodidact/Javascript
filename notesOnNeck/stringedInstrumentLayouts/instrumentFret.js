@@ -46,6 +46,7 @@ class InstrumentFret {
         // -1 if no index found
         let startNote = notes.indexOf(this.string.name); 
 
+        // assign note names to all frets except the top 'invisible' frets
         if(startNote > -1){
             return notes[(startNote + this.id) % 12]
         } else {
