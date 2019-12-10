@@ -1,14 +1,19 @@
 
 const placeMarker = (string,fret) => {
-    let targetFrets = document.querySelectorAll(`#${string} #${fret}`);
 
-    for(let i=0; i<targetFrets.length; i++){
-        let marker = document.createElement('div');
-        marker.classList.add('note-marker');
+    let mystring = document.querySelector(`#string-${string}`);
 
-        targetFrets[i].append(marker);
-    }
+    let myFret = document.querySelector(`#string-${string} #fret-${fret}`);
+    console.log(myFret);
+    
+    // let targetFrets = document.querySelector(`#string-${string} #fret-${fret}`);
+    let marker = document.createElement('div');
+    marker.classList.add('note-marker');
+
+    myFret.append(marker);
+    
 };
+
 
 const removeMarker = (string='all',fret='all') => {
     let markers = document.querySelectorAll(`#${string} #${fret} > .note-marker`);
@@ -34,3 +39,5 @@ console.log(tunings);
 
 
 console.log(neck);
+placeMarker(1,0);
+placeMarker(3,6)

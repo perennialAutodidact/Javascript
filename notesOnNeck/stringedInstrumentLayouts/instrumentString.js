@@ -11,7 +11,7 @@ class InstrumentString{
         let totalStrings = this.neck.totalStrings;
         let newString = document.createElement('div');
 
-        newString.id = this.id;
+        newString.id = `string-${this.id}`;
         
         newString.setAttribute('name', this.name);
 

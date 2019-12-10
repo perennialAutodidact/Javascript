@@ -11,7 +11,7 @@ class InstrumentFret {
         let fretName = this.getFretNote();
         newFret.setAttribute('name', fretName);
 
-        newFret.id = this.id;
+        newFret.id = `fret-${this.id}`;
 
         if(this.id == 0){
             newFret.classList.add('open-fret')
@@ -26,7 +26,10 @@ class InstrumentFret {
                 newFret.classList.add('invisible-fret');
             } else {
                 newFret.classList.add('regular-fret');
-                if(this.string.neck.inlays.includes(parseInt(newFret.id))){
+
+                // change BG color of fret if it has an inlay
+                let newFretNum = parseInt(newFret.id.replace('fret-',''));
+                if(this.string.neck.inlays.includes(newFretNum)){
                     console.log('called');
                     
                     newFret.classList.add('inlay-fret');
