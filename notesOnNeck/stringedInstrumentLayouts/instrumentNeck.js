@@ -31,6 +31,7 @@ class InstrumentNeck {
             // Returns string names 
             return instruments[this.instrument][this.tuning]
         } else {
+            // returns list of tuning names
             return instruments[instrument]
         }
     };
@@ -47,4 +48,38 @@ class InstrumentNeck {
 
         return strings
     }
-}
+    
+    placeNoteMarkers(string='', fret='', notes=[]) {
+        let allFrets;
+        
+        // if no notes, place single marker. else mark all the given notes
+        if(notes.length == 0){
+            let targetFret = document.querySelector(`#string-${string} #fret-${fret}`);
+            let marker = document.createElement('div');
+            
+            marker.classList.add('note-marker');
+            targetFret.append(marker);
+        } else { // if an array of note names is passed
+            allFrets = document.querySelectorAll("[id^=fret]");
+
+            for(let i=0; i<allFrets.length; i++){
+                console.log(allFrets[i]);
+                // 
+            }
+        }
+    };
+
+    removeNoteMarkers(string='all',fret='all') {
+        
+        if(string=='all' && fret=='all') {
+            let markers = document.querySelectorAll(`.note-marker`);
+            
+            for(let i=0; i<markers.length; i++){
+                markers[i].remove();
+            }
+        } else {
+            let marker = document.querySelector(`#string-${string} #fret-${fret} > .note-marker`);
+            marker.remove();
+        }
+    }
+};
