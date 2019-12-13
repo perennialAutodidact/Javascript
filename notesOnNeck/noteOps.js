@@ -33,3 +33,29 @@ const isEnharmonic = (note1, note2) => {
     //Test whether note1 and note2 are enharmonic, i.e. they sound the same.
     return noteToInt(note1) == noteToInt(note2)
 }
+
+const isValidNote = note => {
+    // return true if note is a recognized format. False if not
+    if(_note_dict[note[0]] == undefined){
+        return false
+    } else {        
+        for(let i=1; i<note.length; i++){
+            if(note[i] !== 'b' && note[i] !== '#'){
+                console.log(`invalid char: ${note[i]}`);
+
+                return false
+            }
+        }
+        return true
+    }
+}
+
+console.log(isValidNote("C###bbb#b"));
+
+// """Return True if note is in a recognised format. False if not."""
+// if note[0] not in _note_dict:
+//     return False
+// for post in note[1:]:
+//     if post != 'b' and post != '#':
+//         return False
+// return True
