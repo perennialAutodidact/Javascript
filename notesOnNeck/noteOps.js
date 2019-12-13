@@ -20,7 +20,6 @@ const intToNote = (noteInt, accidentals='#') => {
         } else {
             //raise FormatError()
             console.log(`${accidentals} is not valid as accidental.`);
-            
         }
     } else {
         // raise RangeError()
@@ -36,6 +35,9 @@ const isEnharmonic = (note1, note2) => {
 
 const isValidNote = note => {
     // return true if note is a recognized format. False if not
+
+    note = note.replace('x','##'); //convert double sharp 'x' to two sharps '##'
+
     if(_note_dict[note[0]] == undefined){
         return false
     } else {        
@@ -50,12 +52,44 @@ const isValidNote = note => {
     }
 }
 
-console.log(isValidNote("C###bbb#b"));
+const noteToInt = note => {
+    // Convert notes in the form of C, C#, Cb, C##, etc. to an integer 
+    // in the range of 0-11. 
+    //NoteFormatError exception if the note format is not recognized
+    let noteVal;
 
-// """Return True if note is in a recognised format. False if not."""
-// if note[0] not in _note_dict:
-//     return False
-// for post in note[1:]:
-//     if post != 'b' and post != '#':
-//         return False
-// return True
+    if(isValidNote(note)){
+        noteVal = _note_dict[note[0]]
+    } else {
+        console.log(`'${note}' is not a valid note`);
+    }
+
+    for(let i=1; i<note.length; i++){
+        if(note[i] == 'b'){
+            noteVal--;
+        } else if(note[i] == '#'){
+            noteVal++;
+        }
+    }
+    return noteVal % 12
+}
+
+noteToInt('C###b')
+
+// def note_to_int(note):
+//     """Convert notes in the form of C, C#, Cb, C##, etc. to an integer in the
+//     range of 0-11.
+//     Throw a NoteFormatError exception if the note format is not recognised.
+//     """
+//     if is_valid_note(note):
+//         val = _note_dict[note[0]]
+//     else:
+//         raise NoteFormatError("Unknown note format '%s'" % note)
+
+//     # Check for '#' and 'b' postfixes
+//     for post in note[1:]:
+//         if post == 'b':
+//             val -= 1
+//         elif post == '#':
+//             val += 1
+//     return val % 12
