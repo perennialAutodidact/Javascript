@@ -75,21 +75,3 @@ const noteToInt = note => {
 }
 
 noteToInt('C###b')
-
-// def note_to_int(note):
-//     """Convert notes in the form of C, C#, Cb, C##, etc. to an integer in the
-//     range of 0-11.
-//     Throw a NoteFormatError exception if the note format is not recognised.
-//     """
-//     if is_valid_note(note):
-//         val = _note_dict[note[0]]
-//     else:
-//         raise NoteFormatError("Unknown note format '%s'" % note)
-
-//     # Check for '#' and 'b' postfixes
-//     for post in note[1:]:
-//         if post == 'b':
-//             val -= 1
-//         elif post == '#':
-//             val += 1
-//     return val % 12
