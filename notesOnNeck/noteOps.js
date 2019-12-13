@@ -29,3 +29,7 @@ const intToNote = (noteInt, accidentals='#') => {
 
 }
 
+const isEnharmonic = (note1, note2) => {
+    //Test whether note1 and note2 are enharmonic, i.e. they sound the same.
+    return noteToInt(note1) == noteToInt(note2)
+}
