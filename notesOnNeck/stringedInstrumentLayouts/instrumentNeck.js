@@ -63,7 +63,7 @@ class InstrumentNeck {
             allFrets = document.querySelectorAll("[id^=fret]");
 
             for(let i=0; i<allFrets.length; i++){
-                console.log(allFrets[i]);
+                // console.log(allFrets[i]);
                 // 
             }
         }

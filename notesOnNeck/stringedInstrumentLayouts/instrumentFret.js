@@ -30,7 +30,6 @@ class InstrumentFret {
                 // change BG color of fret if it has an inlay
                 let newFretNum = parseInt(newFret.id.replace('fret-',''));
                 if(this.string.neck.inlays.includes(newFretNum)){
-                    console.log('called');
                     
                     newFret.classList.add('inlay-fret');
                 }
