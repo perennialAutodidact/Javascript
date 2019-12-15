@@ -2,7 +2,7 @@ class InstrumentFret {
     constructor(string, fretNum) {
         this.string = string;
         this.id = fretNum;
-        this.container = this.draw();        
+        this.container = this.draw();
     }
 
     draw() {
@@ -41,7 +41,7 @@ class InstrumentFret {
 
     getFretNote(){
         const notes = ['C', 'Csharp-Dflat', 'D', 'Dsharp-Eflat', 'E', 'F', 'Fsharp-Gflat', 'G', 'Gsharp-Aflat', 'A', 'Asharp-Bflat', 'B'];
-    
+
         // -1 if no index found
         let startNote = notes.indexOf(this.string.name); 
 

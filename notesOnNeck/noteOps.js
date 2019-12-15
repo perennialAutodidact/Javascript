@@ -8,25 +8,42 @@ const _note_dict = {
     'B':10,
 }
 
+const _get_note_names = (accidentals='#', direction='') =>{
+    const notesSharps = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const notesFlats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+    if(accidentals == '#'){
+        if(direction == ''){
+            return notesSharps
+        } else {
+            return notesSharps.slice().reverse()
+        }
+    } else if(accidentals == 'b'){
+        if(direction == ''){
+            return notesFlats
+        } else {
+            return notesFlats.slice().reverse()
+        }
+    }
+}
+
 const intToNote = (noteInt, accidentals='#') => {
-    if(0 <= noteInt || noteInt <= 12){
-        let notesSharps = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-        let notesFlats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
-
-        let notesSharpsReversed = notesSharps.slice().reverse();
-        let notesFlatsReversed = notesFlats.slice().reverse();
-
+    if(0 <= Math.abs(noteInt) && Math.abs(noteInt) <= 12){
+        let notes;
         if(accidentals == '#'){
             if(noteInt < 0){
-                return notesSharpsReversed[Math.abs(noteInt) - 1]
+                notes = _get_note_names('#','reversed')
+                return notes[Math.abs(noteInt) - 1]
             } else {
-                return notesSharps[noteInt]
+                notes = _get_note_names('#')
+                return notes[noteInt]
             }
         } else if(accidentals == 'b'){
             if(noteInt < 0){
-                return notesFlatsReversed[Math.abs(noteInt) - 1]
-
+                notes = _get_note_names('b', 'reversed')
+                return notes[Math.abs(noteInt) - 1]
             } else {
+                notes = _get_note_names('b')
                 return notesFlats[noteInt]
             }
         } else {
@@ -123,4 +140,6 @@ const reduceAccidentals = note => {
     }
 }
 
-console.log(reduceAccidentals("Cbbbbbb"));
+
+// console.log(reduceAccidentals("C"));
+
