@@ -1,7 +1,6 @@
 const noteToInt = (note, accidental='none') => {
 
-    console.log(`noteToBeInted: ${note}`);
-    
+    // console.log(`noteToBeInted: ${note}`);
 
     const note_dict = {
         'C':{
@@ -46,22 +45,40 @@ const noteToInt = (note, accidental='none') => {
 }
 
 
-let notes = [
-    'Cb', 'C', 'C#', 'Db', 'D',
-    'D#', 'Eb', 'E', 'E#', 'Fb', 
-    'F', 'F#', 'Gb', 'G', 'G#', 
-    'Ab', 'A', 'A#', 'Bb', 'B', 'B#',
-]
-
-let accidental;
-for(let i=0; i<notes.length; i++){
-    if(notes[i].length>1){
-        accidental = notes[i][1];
-    } else {
-        accidental = 'none';
+const getNoteNames = (accidentals='#') => {
+    const notesSharps = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const notesFlats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    
+    if(accidentals == '#'){
+        return notesSharps
+    } else{
+        return notesFlats
     }
+}
 
-    console.log(`${notes[i]}:${noteToInt(notes[i], accidental)}`);
+// console.log(getNoteNames('b'));
+
+
+const intToNote = (noteInt, accidental) => {
+    // Grab list of note names based on accidental
+    // return the note name at the index of noteInt
+
+    let noteNames;
+    
+    if(accidental == '#'){
+        // F uses flats
+        if(noteInt == 5){
+            noteNames = getNoteNames('b');
+        } else{
+            noteNames = getNoteNames('#');
+        }
+    } else if(accidental == 'b'){
+        noteNames = getNoteNames('b');
+    } else {
+        noteNames = getNoteNames('#');
+    }
+    
+    return noteNames[noteInt]
 }
 
 
@@ -75,6 +92,7 @@ const expandDoubleSharps = note => {
     }
     return note
 }
+
 
 const reduceAccidentals = note => {
     // Convert all 'x's to '##'
@@ -119,103 +137,37 @@ const reduceAccidentals = note => {
             }
         }
     
-    return noteVal
+    return intToNote(noteVal, accidental)
 }
 
-
-// let n = 'B##'
+// let n = 'B'
 // console.log(`reduce(${n}): ${reduceAccidentals(n)}`);
 
+// Loop for testing output of above functions:
+//
+// let notes = [
+//     'Cb', 'C', 'C#', 'Db', 'D',
+//     'D#', 'Eb', 'E', 'E#', 'Fb', 
+//     'F', 'F#', 'Gb', 'G', 'G#', 
+//     'Ab', 'A', 'A#', 'Bb', 'B', 'B#',
+// ]
 
-
-// const reduceAccidentals = note => {
-//     //Reduce any extra accidentals to proper notes
-//     // Example: reduceAccidentals('C###') => 'E'
-//     note = expandDoubleSharps(note)
-
-//     let noteVal = noteToInt(note[0]),
-//         token = '';
-
-//     console.log(`noteVal: ${noteVal}`);
-    
-//     for(let i=1; i<note.length; i++){
-//         token = note[i];
-//         if(token == 'b'){
-//             noteVal--;
-//         } else if(token == '#'){
-//             noteVal++;
-//         } else {
-//             // raise format error
-//             console.log(`${token} is not a valid token`);
-//         }
-//     }
-
-
-//     console.log(`noteVal: ${noteVal}`);
-//     // console.log(`noteInt: ${noteToInt(noteVal%12)}`);
-    
-//     if(noteVal >= noteToInt(note[0])){
-
-//         return intToNote(noteVal%11);
-
+// let accidental;
+// for(let i=0; i<notes.length; i++){
+//     if(notes[i].length>1){
+//         accidental = notes[i][1];
 //     } else {
-//         return intToNote(noteVal%11, 'b')
+//         accidental = 'none';
 //     }
-// }
-
-// const _get_note_names = (accidentals='#', direction='') =>{
-//     const notesSharps = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-//     const notesFlats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
-
-//     if(accidentals == '#'){
-//         if(direction == ''){
-//             return notesSharps
-//         } else {
-//             return notesSharps.slice().reverse()
-//         }
-//     } else if(accidentals == 'b'){
-//         if(direction == ''){
-//             return notesFlats
-//         } else {
-//             return notesFlats.slice().reverse()
-//         }
-//     }
-// }
-
-// const intToNote = (noteInt, accidentals='#') => {
-
-//     console.log(`NOTE_INT: ${noteInt}`);
     
-
-//     if(0 <= Math.abs(noteInt) && Math.abs(noteInt) <= 12){
-//         let notes;
-//         if(accidentals == '#'){
-//             if(noteInt < 0){
-//                 notes = _get_note_names('#','reversed')
-//                 return notes[Math.abs(noteInt)]
-//             } else {
-//                 notes = _get_note_names('#')
-//                 return notes[noteInt]
-//             }
-//         } else if(accidentals == 'b'){
-//             if(noteInt < 0){
-//                 notes = _get_note_names('b', 'reversed')
-//                 return notes[Math.abs(noteInt) - 1]
-//             } else {
-//                 notes = _get_note_names('b')
-//                 return notes[noteInt]
-//             }
-//         } else {
-//             //raise FormatError()
-//             console.log(`${accidentals} is not valid as accidental.`);
-//         }
-//     } else {
-//         // raise RangeError()
-//         console.log(`int is out of bounds (0-11): ${noteInt}`);
-//     }
-
+//     let n = notes[i];
+//     let nInt = noteToInt(n, accidental);
+//     let rn = reduceAccidentals(n, accidental);
+//     console.log(`${notes[i]}:${noteToInt(notes[i], accidental)} => ${rn}`);
 // }
 
+// Other functions from Python's Mingus library:
+//
 // const isEnharmonic = (note1, note2) => {
 //     //Test whether note1 and note2 are enharmonic, i.e. they sound the same.
 //     return noteToInt(note1) == noteToInt(note2)
@@ -239,36 +191,6 @@ const reduceAccidentals = note => {
 //         return true
 //     }
 // }
-
-// const noteToInt = note => {
-//     // Convert notes in the form of C, C#, Cb, C##, etc. to an integer 
-//     // in the range of 0-11. 
-//     //NoteFormatError exception if the note format is not recognized
-//     let noteVal;
-
-//     if(isValidNote(note)){
-//         noteVal = _note_dict[note[0]]
-//     } else {
-//         console.log(`'${note}' is not a valid note`);
-//     }
-
-//     for(let i=1; i<note.length; i++){
-//         if(note[i] == 'b'){
-//             noteVal--;
-//         } else if(note[i] == '#'){
-//             noteVal++;
-//         }
-//     }
-//     return noteVal % 12
-// }
-
-// // console.log(expandDoubleSharps("Bxbxb"))
-// let n = _note_dict['Bb'];
-
-// console.log(`intToNote(${n}):${intToNote(n)}`);
-
-// console.log(`reduceAccidentals(${n}): ${reduceAccidentals(n)}`);
-// // console.log(`noteToInt('Cb')`)
 
 
 
