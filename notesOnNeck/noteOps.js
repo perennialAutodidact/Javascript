@@ -1,24 +1,166 @@
-// const _note_dict = {
-//     'C': 0,
-//     'C#':1,
-//     'Db':1,
-//     'D': 2,
-//     'D#':3,
-//     'Eb':3,
-//     'E': 4,
-//     'Fb':4,
-//     'E#':5,
-//     'F': 5,
-//     'F#':6,
-//     'Gb':6,
-//     'G': 7,
-//     'G#':8,
-//     'Ab':9,
-//     'A': 9,
-//     'A#':10,
-//     'Bb':10,
-//     'B': 11,
-//     'B#':0,
+const noteToInt = (note, accidental='none') => {
+
+    console.log(`noteToBeInted: ${note}`);
+    
+
+    const note_dict = {
+        'C':{
+            'b':11,
+            'none':0,
+            '#':1,
+        },
+        'D':{
+            'b': 1,
+            'none':2,
+            '#':3,
+        },
+        'E':{
+            'b':3,
+            'none':4,
+            '#':5,
+        },
+        'F': {
+            'b':4,
+            'none':5,
+            '#':6,
+        },
+        'G':{
+            'b':6,
+            'none':7,
+            '#':8,
+        },
+        'A': {
+            'b':8,
+            'none':9,
+            '#':10,
+        },
+        'B': {
+            'b':10,
+            'none':11,
+            '#':0,
+        },
+    }
+
+
+    return note_dict[note[0]][accidental]
+}
+
+
+let notes = [
+    'Cb', 'C', 'C#', 'Db', 'D',
+    'D#', 'Eb', 'E', 'E#', 'Fb', 
+    'F', 'F#', 'Gb', 'G', 'G#', 
+    'Ab', 'A', 'A#', 'Bb', 'B', 'B#',
+]
+
+let accidental;
+for(let i=0; i<notes.length; i++){
+    if(notes[i].length>1){
+        accidental = notes[i][1];
+    } else {
+        accidental = 'none';
+    }
+
+    console.log(`${notes[i]}:${noteToInt(notes[i], accidental)}`);
+}
+
+
+const expandDoubleSharps = note => {
+    // Convert double sharp symbol 'x' to two sharp symbols '##'
+    // Example: expandDoubleSharps('Fx') => 'F##'
+    for(let i=0; i<note.length; i++){
+        if(note[i] == 'x'){
+            note = note.replace(note[i],'##');
+        }
+    }
+    return note
+}
+
+const reduceAccidentals = note => {
+    // Convert all 'x's to '##'
+    // Get number of note to be reduced, 
+    // ++ or -- that value for each tailing # or b
+    // Example: reduceAccidentals('B##') => 'C#', reduceAccidentals('Fb') => 'E'
+
+    note = expandDoubleSharps(note);
+    
+    // console.log(`note: ${note}`);
+    
+    let noteVal,
+        noteName,
+        accidental;
+
+    if(note.length > 1){
+        // console.log();
+        
+        // console.log(note.substring(0,2));
+        noteName = note.substring(0,1);
+        accidental = note.substring(1,2);
+        
+    } else if(note.length == 1){
+        noteName = note;
+        accidental = 'none';
+    }
+        // console.log(`notename: ${noteName} ${accidental}`);
+        
+        noteVal = noteToInt(noteName, accidental);
+
+        for(let i=2; i<note.length; i++){
+            if(note[i] == '#'){
+                noteVal++;
+                if(noteVal == 12){
+                    noteVal = 0;
+                }
+            } else if(note[i] == 'b') {
+                noteVal--;
+                if(noteVal == -1) {
+                    noteVal = 11;
+                }
+            }
+        }
+    
+    return noteVal
+}
+
+
+// let n = 'B##'
+// console.log(`reduce(${n}): ${reduceAccidentals(n)}`);
+
+
+
+// const reduceAccidentals = note => {
+//     //Reduce any extra accidentals to proper notes
+//     // Example: reduceAccidentals('C###') => 'E'
+//     note = expandDoubleSharps(note)
+
+//     let noteVal = noteToInt(note[0]),
+//         token = '';
+
+//     console.log(`noteVal: ${noteVal}`);
+    
+//     for(let i=1; i<note.length; i++){
+//         token = note[i];
+//         if(token == 'b'){
+//             noteVal--;
+//         } else if(token == '#'){
+//             noteVal++;
+//         } else {
+//             // raise format error
+//             console.log(`${token} is not a valid token`);
+//         }
+//     }
+
+
+//     console.log(`noteVal: ${noteVal}`);
+//     // console.log(`noteInt: ${noteToInt(noteVal%12)}`);
+    
+//     if(noteVal >= noteToInt(note[0])){
+
+//         return intToNote(noteVal%11);
+
+//     } else {
+//         return intToNote(noteVal%11, 'b')
+//     }
 // }
 
 // const _get_note_names = (accidentals='#', direction='') =>{
@@ -74,19 +216,6 @@
 
 // }
 
-// const expandDoubleSharps = note => {
-//     // Convert double sharp symbol 'x' to two sharp symbols '##'
-//     // Example: expandDoubleSharps('Fx') => 'F##'
-//     for(let i=0; i<note.length; i++){
-//         if(note[i] == 'x'){
-//             note = note.replace(note[i],'##');
-//         }
-//     }
-//     // console.log(`note: ${note}`);
-    
-//     return note
-// }
-
 // const isEnharmonic = (note1, note2) => {
 //     //Test whether note1 and note2 are enharmonic, i.e. they sound the same.
 //     return noteToInt(note1) == noteToInt(note2)
@@ -133,40 +262,6 @@
 //     return noteVal % 12
 // }
 
-// const reduceAccidentals = note => {
-//     //Reduce any extra accidentals to proper notes
-//     // Example: reduceAccidentals('C###') => 'E'
-//     note = expandDoubleSharps(note)
-
-//     let noteVal = noteToInt(note[0]),
-//         token = '';
-
-//     console.log(`noteVal: ${noteVal}`);
-    
-//     for(let i=1; i<note.length; i++){
-//         token = note[i];
-//         if(token == 'b'){
-//             noteVal--;
-//         } else if(token == '#'){
-//             noteVal++;
-//         } else {
-//             // raise format error
-//             console.log(`${token} is not a valid token`);
-//         }
-//     }
-
-
-//     console.log(`noteVal: ${noteVal}`);
-//     // console.log(`noteInt: ${noteToInt(noteVal%12)}`);
-    
-//     if(noteVal >= noteToInt(note[0])){
-
-//         return intToNote(noteVal%11);
-
-//     } else {
-//         return intToNote(noteVal%11, 'b')
-//     }
-// }
 // // console.log(expandDoubleSharps("Bxbxb"))
 // let n = _note_dict['Bb'];
 

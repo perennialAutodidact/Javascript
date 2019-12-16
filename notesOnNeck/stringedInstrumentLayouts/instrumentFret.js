@@ -58,12 +58,10 @@ class InstrumentFret {
 
             fretName = curString.interval(curInterval);
 
-
-            console.log(`fretName: ${fretName}`);
-            
             if(this.id == 12){
-            
+                fretName = `${fretName.name()}${fretName.octave()+1}`
             }
+
             return fretName
             // let curKeyName = `${this.string.neck.curKey.scientific()[0]}${curString.octave()}`
 
