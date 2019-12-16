@@ -8,7 +8,7 @@ class InstrumentFret {
     draw() {
         let newFret = document.createElement('div');
         
-        let fretName = this.getFretNote();
+        let fretName = this.getFretName();
         newFret.setAttribute('name', fretName);
 
         newFret.id = `fret-${this.id}`;
@@ -39,18 +39,62 @@ class InstrumentFret {
         return newFret
     }
 
-    getFretNote(){
+    getFretName(){
         const notes = ['C', 'Csharp-Dflat', 'D', 'Dsharp-Eflat', 'E', 'F', 'Fsharp-Gflat', 'G', 'Gsharp-Aflat', 'A', 'Asharp-Bflat', 'B'];
+        const intervalsWithAug4 = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'A4', 'P5', 'm6', 'M6', 'm7', 'M7'];
+        const intervalsWithDim5 = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'D5', 'P5', 'm6', 'M6', 'm7', 'M7'];
 
-        // -1 if no index found
-        let startNote = notes.indexOf(this.string.name); 
+        let curString, curInterval, fretName;
 
-        // assign note names to all frets except the top 'invisible' frets
-        if(startNote > -1){
-            return notes[(startNote + this.id) % 12]
+        if(this.string.name != 'invisible'){
+            curString = teoria.note(this.string.name);
+            // console.log(`curString: ${curString}`);
+
+            if(this.string.neck.markedNotes.includes('d5')){
+                curInterval =  intervalsWithDim5[this.id%12];
+            } else {
+                curInterval =  intervalsWithAug4[this.id%12];
+            }
+
+            fretName = curString.interval(curInterval);
+
+
+            console.log(`fretName: ${fretName}`);
+            
+            if(this.id == 12){
+            
+            }
+            return fretName
+            // let curKeyName = `${this.string.neck.curKey.scientific()[0]}${curString.octave()}`
+
+            // let key = teoria.note(curKeyName);
+
+            // console.log(`keyName: ${curKeyName}`);
+            // console.log(`key: ${key}`);
+            
+            let fretNum = this.id;
+
+            // let offsetInterval = teoria.interval(key, curString).number();
+    
+            // console.log(`noteOffset: ${offsetInterval}`); 
+            // console.log(`offsetIndx: ${offsetIndx}`);
+            // let fretName = intervalsWithAug4[(offsetInterval + this.id + 1) % 12]
+            // console.log(`fretName: ${fretName}`);
+            
+            // return notes[(this.id + offsetInterval + 1) % 12]
         } else {
             return 'no-note'
         }
+
+        // -1 if no index found
+        // let startNote = notes.indexOf(this.string.name); 
+
+        // assign note names to all frets except the top 'invisible' frets
+        // if(startNote > -1){
+        //     return notes[(startNote + this.id) % 12]
+        // } else {
+        //     return 'no-note'
+        // }
     }
 }
 

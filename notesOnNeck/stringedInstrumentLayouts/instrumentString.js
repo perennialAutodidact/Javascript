@@ -4,7 +4,7 @@ class InstrumentString{
         this.id = stringNum;
         this.name = stringName;
         this.container = this.draw();
-        this.frets = this.drawFrets();
+        this.frets = this.createFrets();
     }
     
     draw(){
@@ -23,10 +23,11 @@ class InstrumentString{
         return newString
     }
 
-    drawFrets() {
+    createFrets() {        
         let frets = [];
         for(let i=this.neck.startFret; i<this.neck.endFret; i++){
             let fretNum = i;
+
             let fret = new InstrumentFret(this, fretNum);
 
             this.container.append(fret.container);

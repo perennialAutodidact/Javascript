@@ -5,6 +5,11 @@ class InstrumentNeck {
         this.startFret = startFret;
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12];
+        this.curKey = teoria.note('C');
+
+        this.markedNotes = this.curKey.scale('ionian').scale;
+        console.log(this.markedNotes);
+        
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
         this.totalStrings = this.stringNames.length;
@@ -14,10 +19,10 @@ class InstrumentNeck {
     getInstrumentTunings(instrument='') {
         const instruments = {
             'guitar': {
-                'standard': ['E','A','D','G','B','E'],
-                'drop-d': ['D','A','D','G','B','A'],
-                'dadgad': ['D','A','D','G','A','D'],
-                'open-d': ['D','A','D','F#/Gb','A','D'],
+                'standard': ['E2','A3','D3','G3','B4','E4'],
+                'drop-d': ['D2','A3','D3','G3','B4','E4'],
+                'dadgad': ['D2','A3','D3','G3','A4','D4'],
+                'open-d': ['D2','A3','D3','F#3','A4','D4'],
             },
             'mandolin': {
                 'standard': ['G','D','A','E'],
@@ -39,12 +44,17 @@ class InstrumentNeck {
     drawStrings(){
         let strings = [];
         for(let i=0; i<this.stringNames.length + 1; i++){
+            
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
 
             this.container.prepend(string.container);
             strings.push(string);
+            console.log();
+            console.log();
+            console.log();
         }
+
 
         return strings
     }
