@@ -7,8 +7,7 @@ class InstrumentNeck {
         this.inlays = [3,5,7,9,12];
         this.curKey = teoria.note('C');
 
-        this.markedNotes = this.curKey.scale('ionian').scale;
-        console.log(this.markedNotes);
+        this.markedNotes = this.curKey.scale('phrygian').simple();
         
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
@@ -50,34 +49,35 @@ class InstrumentNeck {
 
             this.container.prepend(string.container);
             strings.push(string);
-            console.log();
-            console.log();
-            console.log();
         }
 
 
         return strings
     }
     
-    placeNoteMarkers(string='', fret='', notes=[]) {
-        let allFrets;
-        
-        // if no notes, place single marker. else mark all the given notes
-        if(notes.length == 0){
-            let targetFret = document.querySelector(`#string-${string} #fret-${fret}`);
-            let marker = document.createElement('div');
-            
-            marker.classList.add('note-marker');
-            targetFret.append(marker);
-        } else { // if an array of note names is passed
-            allFrets = document.querySelectorAll("[id^=fret]");
+    placeNoteMarkers(){
+        console.log(this.markedNotes);
+    }
 
-            for(let i=0; i<allFrets.length; i++){
-                // console.log(allFrets[i]);
-                // 
-            }
-        }
-    };
+    // placeNoteMarkers(string='', fret='', notes=[]) {
+    //     let allFrets;
+        
+    //     // if no notes, place single marker. else mark all the given notes
+    //     if(notes.length == 0){
+    //         let targetFret = document.querySelector(`#string-${string} #fret-${fret}`);
+    //         let marker = document.createElement('div');
+            
+    //         marker.classList.add('note-marker');
+    //         targetFret.append(marker);
+    //     } else { // if an array of note names is passed
+    //         allFrets = document.querySelectorAll("[id^=fret]");
+
+    //         for(let i=0; i<allFrets.length; i++){
+    //             // console.log(allFrets[i]);
+    //             // 
+    //         }
+    //     }
+    // };
 
     removeNoteMarkers(string='all',fret='all') {
         

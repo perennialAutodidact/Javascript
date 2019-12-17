@@ -1,8 +1,8 @@
 const noteToInt = (note, accidental='none') => {
+    // returns note value 0-11
+    // for given note/accidental pair
 
-    // console.log(`noteToBeInted: ${note}`);
-
-    const note_dict = {
+    const note_ = {
         'C':{
             'b':11,
             'none':0,
@@ -46,6 +46,7 @@ const noteToInt = (note, accidental='none') => {
 
 
 const getNoteNames = (accidentals='#') => {
+    // returns list of notes with selected accidentals
     const notesSharps = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     const notesFlats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
     
@@ -55,8 +56,6 @@ const getNoteNames = (accidentals='#') => {
         return notesFlats
     }
 }
-
-// console.log(getNoteNames('b'));
 
 
 const intToNote = (noteInt, accidental) => {
@@ -75,6 +74,7 @@ const intToNote = (noteInt, accidental) => {
     } else if(accidental == 'b'){
         noteNames = getNoteNames('b');
     } else {
+        // all natural key names get sharps, except F, which gets flats, above
         noteNames = getNoteNames('#');
     }
     
@@ -102,16 +102,11 @@ const reduceAccidentals = note => {
 
     note = expandDoubleSharps(note);
     
-    // console.log(`note: ${note}`);
-    
     let noteVal,
         noteName,
         accidental;
 
     if(note.length > 1){
-        // console.log();
-        
-        // console.log(note.substring(0,2));
         noteName = note.substring(0,1);
         accidental = note.substring(1,2);
         
@@ -123,12 +118,16 @@ const reduceAccidentals = note => {
         
         noteVal = noteToInt(noteName, accidental);
 
+        // check remaining characters
         for(let i=2; i<note.length; i++){
+            
+            // raise note value if sharp
             if(note[i] == '#'){
                 noteVal++;
                 if(noteVal == 12){
                     noteVal = 0;
                 }
+            // lower note value if flat
             } else if(note[i] == 'b') {
                 noteVal--;
                 if(noteVal == -1) {
@@ -145,12 +144,7 @@ const reduceAccidentals = note => {
 
 // Loop for testing output of above functions:
 //
-// let notes = [
-//     'Cb', 'C', 'C#', 'Db', 'D',
-//     'D#', 'Eb', 'E', 'E#', 'Fb', 
-//     'F', 'F#', 'Gb', 'G', 'G#', 
-//     'Ab', 'A', 'A#', 'Bb', 'B', 'B#',
-// ]
+
 
 // let accidental;
 // for(let i=0; i<notes.length; i++){
