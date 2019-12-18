@@ -5,9 +5,9 @@ class InstrumentNeck {
         this.startFret = startFret;
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12,15];
-        this.curKey = teoria.note('C#');
+        this.curKey = teoria.note('Cb');
 
-        this.markedNotes = this.curKey.scale('mixolydian').simple();
+        this.markedNotes = this.curKey.scale('locrian').simple();
         
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
@@ -51,90 +51,69 @@ class InstrumentNeck {
             strings.push(string);
         }
 
-
         return strings
     }
-    
-    placeNoteMarkers(){
-        let markedNote,
-            markedNoteName,
+
+    // adds enharmonic notes to this.marked notes
+    // in order to mark all frets on neck, as some
+    // are named with flats and some with sharps
+    addEnharmonics(){
+        let notes,
+            note,
+            i,j,
             enharmonics,
-            enharmonic,
+            enharmonic;
+
+        notes = this.markedNotes.slice();
+
+        for(i in notes){
+            console.log(notes[i]);
+            note = teoria.note(notes[i])
+            enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(','); 
+
+            for(j in enharmonics){
+                enharmonic = enharmonics[j];
+                
+                // if enharmonic is not double flat 'Dbb' or double sharp 'Cx', i.e. C, D#, Bb etc.
+                if(enharmonic.length < 3 && !enharmonic.includes('x')){
+                    notes.push(enharmonic);
+                }
+            }
+        }
+        return notes
+    }
+
+    placeNoteMarkers(){
+        let markedNotes,
+            markedNote,
+            markedNoteName,
             matchingFrets,
             matchingFret,
             marker;
 
-
-        // let frets = document.querySelectorAll(`[name="${this.markedNotes[0]}"]`)
-        // console.log(this.markedNotes[0]);
-        // console.log(frets);
+        markedNotes = this.addEnharmonics();
+        // console.log(`markedNotes: ${markedNotes}`);
         
-        // console.log(`marked notes: ${this.markedNotes}`);
         // check each marked note to see if it matches
         // the name of any frets. If so, mark them, if not, 
         // try its enharmonic names. 
-        for(let i=0; i<this.markedNotes.length; i++){
-            markedNote = teoria.note(this.markedNotes[i])
+        for(let i=0; i<markedNotes.length; i++){
+            markedNote = teoria.note(markedNotes[i])
 
             markedNoteName = markedNote.scientific().toLowerCase().slice(0,-1);
 
-            console.log(markedNoteName);
-            
-
             matchingFrets = document.querySelectorAll(`[name="${markedNoteName}"]`);
-            
-            // console.log(matchingFrets);
 
-            if(matchingFrets.length > 0){
-                for(let i=0; i<matchingFrets.length; i++){
-                    matchingFret = matchingFrets[i];
-                    
-                    marker = document.createElement('div');
-                    marker.classList.add('note-marker');
-                    matchingFret.append(marker);
-                }
-
-            } else {
-                // find notes that are enharmonic to markedNote. Same note, different name.
-                enharmonics = markedNote.enharmonics().toString().replace(/[0-9]/g, '').split(','); 
+            for(let i=0; i<matchingFrets.length; i++){
+                matchingFret = matchingFrets[i];
                 
-                for(let i in enharmonics){
-                    enharmonic = enharmonics[i] 
-                    
-                    if(enharmonic.length < 3 && !enharmonic.includes('x')){
-                        console.log(`enharmonic: ${enharmonic}`);
-                        
-                    }
-                }
+                marker = document.createElement('div');
+                marker.classList.add('note-marker');
+                matchingFret.append(marker);
             }
+
         }
-            // if marked note is on the fretboard,
-            // check enharmonics, starting with shortest name.
-
-            // create a function to switch sharp notes to flat enharmonics
-            // if key uses flats. Might have weird edge cases for double accidentals
-        }
-    
-
-    // placeNoteMarkers(string='', fret='', notes=[]) {
-    //     let allFrets;
-        
-    //     // if no notes, place single marker. else mark all the given notes
-    //     if(notes.length == 0){
-    //         let targetFret = document.querySelector(`#string-${string} #fret-${fret}`);
-    //         let marker = document.createElement('div');
-            
-    //         marker.classList.add('note-marker');
-    //         targetFret.append(marker);
-    //     } else { // if an array of note names is passed
-    //         allFrets = document.querySelectorAll("[id^=fret]");
-
-    //         for(let i=0; i<allFrets.length; i++){
-    //             // console.log(allFrets[i]);
-    //             // 
-    //         }
-    //     }
-    // };
+    }
 
     removeNoteMarkers(string='all',fret='all') {
         
