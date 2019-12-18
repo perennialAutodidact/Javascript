@@ -4,10 +4,10 @@ class InstrumentNeck {
         this.tuning = tuning;
         this.startFret = startFret;
         this.endFret = endFret;
-        this.inlays = [3,5,7,9,12];
-        this.curKey = teoria.note('C');
+        this.inlays = [3,5,7,9,12,15];
+        this.curKey = teoria.note('Cb');
 
-        this.markedNotes = this.curKey.scale('phrygian').simple();
+        this.markedNotes = this.curKey.scale('lydian').simple();
         
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
@@ -56,7 +56,22 @@ class InstrumentNeck {
     }
     
     placeNoteMarkers(){
-        console.log(this.markedNotes);
+        let note,
+            enharmonics;
+
+        for(let i=0; i<this.markedNotes.length; i++){
+            console.log(`note: ${this.markedNotes[i]}`);
+            note = teoria.note(this.markedNotes[i])
+            enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(',');
+
+            console.log(`enharmonics: ${enharmonics}`);
+
+            // if marked note is on the fretboard,
+            // check enharmonics, starting with shortest name.
+
+            // create a function to switch sharp notes to flat enharmonics
+            // if key uses flats. Might have weird edge cases for double accidentals
+        }
     }
 
     // placeNoteMarkers(string='', fret='', notes=[]) {

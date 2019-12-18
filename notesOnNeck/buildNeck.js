@@ -12,7 +12,7 @@ for(let tuning in tunings){
     tuningInput.append(option);
 }
 
-neck.placeNoteMarkers()
+neck.placeNoteMarkers();
 // console.log(tunings);
 
 
@@ -30,7 +30,6 @@ neck.placeNoteMarkers()
 // neck.removeMarkers(3,6);
 // neck.removeMarkers();
 
-// let note1 = teoria.note('C#4');
 
 // console.log(note1.octave());
 
@@ -40,3 +39,9 @@ neck.placeNoteMarkers()
 
 // console.log(`${note1} ionian: ${ionian}`);
 // console.log(`${note1} lydian: ${lydian}`);
+
+
+
+// let note1 = teoria.note('Fb');
+// console.log(note1.enharmonics().toString().replace(/[0-9]/g, '').split(','));
+

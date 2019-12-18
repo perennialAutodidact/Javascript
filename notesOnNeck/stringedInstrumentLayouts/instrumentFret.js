@@ -66,16 +66,17 @@ class InstrumentFret {
             }
 
             // actual interval from open note to current fret
-            fretName = curString.interval(curInterval);
+            fretName = curString.interval(curInterval).toString();
+
+            // fretName = fretName.slice(fretName.length-1, 1);
+
 
             // raise octave for 12th fret
-            if(this.id == 12){
-                fretName = `${fretName.name()}${fretName.octave()+1}`
-            }
+            // if(this.string.id == 12){
+            //     fretName = `${fretName.toString()}`//${fretName.octave()+1}`
+            // }
 
-            return fretName
-
-            let fretNum = this.id;
+            return fretName.slice(0, -1)
 
         } else {
 
