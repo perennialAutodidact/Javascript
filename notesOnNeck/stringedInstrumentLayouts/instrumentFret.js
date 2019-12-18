@@ -68,7 +68,8 @@ class InstrumentFret {
             // actual interval from open note to current fret
             fretName = curString.interval(curInterval).toString();
 
-            // fretName = fretName.slice(fretName.length-1, 1);
+
+            // change all flat notes to enharmonic sharp notes
 
 
             // raise octave for 12th fret
