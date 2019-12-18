@@ -74,7 +74,9 @@ class InstrumentNeck {
             for(j in enharmonics){
                 enharmonic = enharmonics[j];
                 
-                // if enharmonic is not double flat 'Dbb' or double sharp 'Cx', i.e. C, D#, Bb etc.
+                // if enharmonic is not double flat 'Dbb' 
+                // or double sharp 'Cx', i.e. C, D#, Bb etc.
+                // push to array
                 if(enharmonic.length < 3 && !enharmonic.includes('x')){
                     notes.push(enharmonic);
                 }

@@ -1,11 +1,17 @@
 
 const neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
-let tuningInput = document.querySelector('#tuning-input')
-let tunings = neck.getInstrumentTunings(document.querySelector('#instrument-input').value);
+let tuningInput = document.querySelector('#tuning-input'),
+    tunings = neck.getInstrumentTunings(document.querySelector('#instrument-input').value),
+    tuning,
+    option,
+    scaleFormulaInput,
+    scaleName,
+    keyInput,
+    key;
 
-for(let tuning in tunings){
-    let option = document.createElement('option');
+for(tuning in tunings){
+    option = document.createElement('option');
     option.value = tuning;
     option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
     
@@ -13,35 +19,23 @@ for(let tuning in tunings){
 }
 
 neck.placeNoteMarkers();
-// console.log(tunings);
 
+scaleFormulaInput = document.querySelector('#scale-formula-input');
 
-// console.log(neck);
-// neck.placeNoteMarkers(1,0);
-// neck.placeNoteMarkers(3,6);
-// neck.placeNoteMarkers(5,1);
-// neck.placeNoteMarkers(0,0);
+scaleFormulaInput.addEventListener('change', function(){
+    
+    keyInput = document.querySelector('#key-input');
 
-// console.log(neck.stringNames);
+    scaleName = this.value;
+    key = keyInput.value;
 
+    neck.curKey = teoria.note(key);
+    neck.markedNotes = neck.curKey.scale(scaleName).simple();
+    // console.log(neck.curKey);
+    neck.removeNoteMarkers();
 
-// neck.placeNoteMarkers('', '', neck.stringNames);
-
-// neck.removeMarkers(3,6);
-// neck.removeMarkers();
-
-
-// console.log(note1.octave());
-
-
-// let ionian = note1.scale('ionian').simple()
-// let lydian = note1.scale('lydian').simple()
-
-// console.log(`${note1} ionian: ${ionian}`);
-// console.log(`${note1} lydian: ${lydian}`);
-
-
-
-// let note1 = teoria.note('Fb');
-// console.log(note1.enharmonics().toString().replace(/[0-9]/g, '').split(','));
-
+    neck.placeNoteMarkers();
+    // add send key and scale to neck object.
+    // call placeNoteMarkers()
+    
+})
