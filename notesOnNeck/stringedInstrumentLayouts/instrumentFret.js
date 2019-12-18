@@ -62,7 +62,7 @@ class InstrumentFret {
                 // name of interval from open note to current fret
                 curInterval =  intervalsWithDim5[this.id%12];
             } else {
-                curInterval =  intervalsWithAug4[this.id%12];
+                curInterval = intervalsWithAug4[this.id%12];
             }
 
             // actual interval from open note to current fret

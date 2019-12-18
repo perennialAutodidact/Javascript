@@ -113,18 +113,17 @@ class InstrumentNeck {
                 marker.classList.add('note-marker');
                 matchingFret.append(marker);
             }
-
         }
     }
 
     removeNoteMarkers(string='all',fret='all') {
-        
         if(string=='all' && fret=='all') {
             let markers = document.querySelectorAll(`.note-marker`);
             
             for(let i=0; i<markers.length; i++){
                 markers[i].remove();
             }
+            
         } else {
             let marker = document.querySelector(`#string-${string} #fret-${fret} > .note-marker`);
             marker.remove();
