@@ -18,24 +18,30 @@ for(tuning in tunings){
     tuningInput.append(option);
 }
 
-neck.placeNoteMarkers();
-
-scaleFormulaInput = document.querySelector('#scale-formula-input');
-
-scaleFormulaInput.addEventListener('change', function(){
-    
+// grabs current input for scale name and key,
+// sends that info to the neck object
+// then removes old markers and places new ones
+const changeMarkers = () => {
     keyInput = document.querySelector('#key-input');
+    scaleInput = document.querySelector('#scale-formula-input');
 
-    scaleName = this.value;
+    scaleName = scaleInput.value;
     key = keyInput.value;
 
     neck.curKey = teoria.note(key);
     neck.markedNotes = neck.curKey.scale(scaleName).simple();
-    // console.log(neck.curKey);
+
     neck.removeNoteMarkers();
 
     neck.placeNoteMarkers();
-    // add send key and scale to neck object.
-    // call placeNoteMarkers()
-    
-})
+}
+
+neck.placeNoteMarkers();
+
+scaleFormulaInput = document.querySelector('#scale-formula-input');
+
+scaleFormulaInput.addEventListener('change', changeMarkers);
+
+keyInput = document.querySelector('#key-input');
+
+keyInput.addEventListener('change', changeMarkers);
