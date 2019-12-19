@@ -1,5 +1,5 @@
 
-const neck = new InstrumentNeck('mandolin', 'standard', 0, 13);
+const neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
 let tuningInput = document.querySelector('#tuning-input'),
     tunings = neck.getInstrumentTunings(document.querySelector('#instrument-input').value),
@@ -21,7 +21,7 @@ for(tuning in tunings){
 // grabs current input for scale name and key,
 // sends that info to the neck object
 // then removes old markers and places new ones
-const changeMarkers = () => {
+const updateNeck = () => {
     keyInput = document.querySelector('#key-input');
     scaleInput = document.querySelector('#scale-formula-input');
 
@@ -40,10 +40,13 @@ neck.placeNoteMarkers();
 
 scaleFormulaInput = document.querySelector('#scale-formula-input');
 
-scaleFormulaInput.addEventListener('change', changeMarkers);
+scaleFormulaInput.addEventListener('change', updateNeck);
 
 keyInput = document.querySelector('#key-input');
 
-keyInput.addEventListener('change', changeMarkers);
+keyInput.addEventListener('change', updateNeck);
 
-console.log(teoria.Scale.KNOWN_SCALES);
+let n1 = teoria.note('e2')
+let n2 = teoria.note('c3');
+
+console.log(n1.interval(n2).toString());

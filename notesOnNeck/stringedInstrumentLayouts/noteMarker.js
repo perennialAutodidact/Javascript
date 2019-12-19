@@ -4,4 +4,6 @@ class NoteMarker {
         this.fretId = fretId;
         this.interval = interval;
     }
+
+    
 }

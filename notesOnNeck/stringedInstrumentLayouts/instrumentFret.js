@@ -8,12 +8,16 @@ class InstrumentFret {
     }
 
     draw() {
-        let newFret = document.createElement('div');
-        
-        let fretName = this.getFretName();
-        newFret.setAttribute('name', fretName);
+        let newFret = document.createElement('div'),
+            fretNoteName = this.getFretName();
 
+        newFret.setAttribute('name', fretNoteName.slice(0,-1));
+        newFret.dataset.note = fretNoteName;
         newFret.id = `fret-${this.id}`;
+        
+        
+        
+        // newFret.dataset.interval =   
 
         if(this.id == 0){
             newFret.classList.add('open-fret')
@@ -77,7 +81,7 @@ class InstrumentFret {
             //     fretName = `${fretName.toString()}`//${fretName.octave()+1}`
             // }
 
-            return fretName.slice(0, -1)
+            return fretName
 
         } else {
 
