@@ -1,5 +1,5 @@
 
-const neck = new InstrumentNeck('guitar', 'standard', 0, 13);
+const neck = new InstrumentNeck('mandolin', 'standard', 0, 13);
 
 let tuningInput = document.querySelector('#tuning-input'),
     tunings = neck.getInstrumentTunings(document.querySelector('#instrument-input').value),
@@ -45,3 +45,5 @@ scaleFormulaInput.addEventListener('change', changeMarkers);
 keyInput = document.querySelector('#key-input');
 
 keyInput.addEventListener('change', changeMarkers);
+
+console.log(teoria.Scale.KNOWN_SCALES);

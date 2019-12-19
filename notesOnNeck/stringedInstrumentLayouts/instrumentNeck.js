@@ -24,10 +24,10 @@ class InstrumentNeck {
                 'open-d': ['D2','A3','D3','F#3','A4','D4'],
             },
             'mandolin': {
-                'standard': ['G','D','A','E'],
+                'standard': ['G2','D3','A3','E4'],
             },
             'ukulele': {
-                'standard': ['D','G','B','E'],
+                'standard': ['G4', 'C4','E4','A4'],
             }
         }
         
@@ -123,7 +123,7 @@ class InstrumentNeck {
             for(let i=0; i<markers.length; i++){
                 markers[i].remove();
             }
-            
+
         } else {
             let marker = document.querySelector(`#string-${string} #fret-${fret} > .note-marker`);
             marker.remove();
