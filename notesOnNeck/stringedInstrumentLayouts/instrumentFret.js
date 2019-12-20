@@ -9,46 +9,49 @@ class InstrumentFret {
 
     draw() {
         let newFret = document.createElement('div'),
-            fretNoteName = this.getFretName();
-            console.log(typeof fretNoteName);
+            fretNoteName = this.getFretName(),
+            noteName,
+            noteOctave;
+
+        if(fretNoteName != 'no-note'){
+        
+            noteName = fretNoteName.slice(0,-1);
+            newFret.setAttribute('name', noteName);
+
+            noteOctave = fretNoteName.slice(fretNoteName.length-1, fretNoteName.length);
+            newFret.dataset.octave = noteOctave;
+            newFret.id = `fret-${this.id}`;
+
+            // note = teoria.note(fretNoteName.slice(0,-1));
             
+            if(this.id == 0){
+                newFret.classList.add('open-fret')
+                if(this.string.container.classList.contains('invisible-string')){
 
-        newFret.setAttribute('name', fretNoteName.slice(0,-1));
-        newFret.dataset.octave = fretNoteName.slice(fretNoteName.length-1, fretNoteName.length);
-        newFret.id = `fret-${this.id}`;
-        
-        
-        
-        // newFret.dataset.interval =   
+                    newFret.classList.add('invisible-open-fret');
+                } else {
 
-        if(this.id == 0){
-            newFret.classList.add('open-fret')
-            if(this.string.container.classList.contains('invisible-string')){
-
-                newFret.classList.add('invisible-open-fret');
-            } else {
-
-                newFret.classList.add('inlay-fret');
-            }
-        } else {
-
-            newFret.classList.add('fret');
-            if(this.string.container.classList.contains('invisible-string')){
-
-                newFret.classList.add('invisible-fret');
-            } else {
-
-                newFret.classList.add('regular-fret');
-
-                // change BG color of fret if it has an inlay in neck.inlays
-                let newFretNum = parseInt(newFret.id.replace('fret-',''));
-                if(this.string.neck.inlays.includes(newFretNum)){
-                    
                     newFret.classList.add('inlay-fret');
+                }
+            } else {
+
+                newFret.classList.add('fret');
+                if(this.string.container.classList.contains('invisible-string')){
+
+                    newFret.classList.add('invisible-fret');
+                } else {
+
+                    newFret.classList.add('regular-fret');
+
+                    // change BG color of fret if it has an inlay in neck.inlays
+                    let newFretNum = parseInt(newFret.id.replace('fret-',''));
+                    if(this.string.neck.inlays.includes(newFretNum)){
+                        
+                        newFret.classList.add('inlay-fret');
+                    }
                 }
             }
         }
-
         return newFret
     }
 
@@ -71,21 +74,16 @@ class InstrumentFret {
                 curInterval = intervalsWithAug4[this.id%12];
             }
 
-            // actual interval from open note to current fret
-            fretName = curString.interval(curInterval)//.toString();
+            // actual interval object from open note to current fret
+            fretName = curString.interval(curInterval);
             
+            // raise octave of 12th fret to avoid modulus making id=0
             if(this.id === 12){
                 fretName = `${fretName.toString().slice(0,-1)}${fretName.octave()+1}`
-                fretName = fretName.toString();
 
             } else {
                 fretName = fretName.toString();
             }
-
-            // change all flat notes to enharmonic sharp notes
-
-
-            // raise octave for 12th fret
 
             return fretName
 

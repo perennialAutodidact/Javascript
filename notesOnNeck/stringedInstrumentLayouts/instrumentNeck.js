@@ -5,7 +5,7 @@ class InstrumentNeck {
         this.startFret = startFret;
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12,15];
-        this.curKey = teoria.note('Cb');
+        this.curKey = teoria.note('cb');
 
         this.markedNotes = this.curKey.scale('locrian').simple();
         
@@ -109,9 +109,9 @@ class InstrumentNeck {
             for(let i=0; i<matchingFrets.length; i++){
                 matchingFret = matchingFrets[i];
                 
-                marker = document.createElement('div');
-                marker.classList.add('note-marker');
-                matchingFret.append(marker);
+                //create new NoteMarker and place in matching fret
+                marker = new NoteMarker(matchingFret);
+                matchingFret.append(marker.container);
             }
         }
     }
