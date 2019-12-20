@@ -10,9 +10,11 @@ class InstrumentFret {
     draw() {
         let newFret = document.createElement('div'),
             fretNoteName = this.getFretName();
+            console.log(typeof fretNoteName);
+            
 
         newFret.setAttribute('name', fretNoteName.slice(0,-1));
-        newFret.dataset.note = fretNoteName;
+        newFret.dataset.octave = fretNoteName.slice(fretNoteName.length-1, fretNoteName.length);
         newFret.id = `fret-${this.id}`;
         
         
@@ -70,16 +72,20 @@ class InstrumentFret {
             }
 
             // actual interval from open note to current fret
-            fretName = curString.interval(curInterval).toString();
+            fretName = curString.interval(curInterval)//.toString();
+            
+            if(this.id === 12){
+                fretName = `${fretName.toString().slice(0,-1)}${fretName.octave()+1}`
+                fretName = fretName.toString();
 
+            } else {
+                fretName = fretName.toString();
+            }
 
             // change all flat notes to enharmonic sharp notes
 
 
             // raise octave for 12th fret
-            // if(this.string.id == 12){
-            //     fretName = `${fretName.toString()}`//${fretName.octave()+1}`
-            // }
 
             return fretName
 
