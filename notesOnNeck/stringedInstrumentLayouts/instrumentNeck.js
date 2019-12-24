@@ -108,7 +108,7 @@ class InstrumentNeck {
 
             for(let i=0; i<matchingFrets.length; i++){
                 matchingFret = matchingFrets[i];
-                
+                                
                 //create new NoteMarker and place in matching fret
                 marker = new NoteMarker(matchingFret);
                 matchingFret.append(marker.container);

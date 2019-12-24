@@ -1,7 +1,6 @@
 class InstrumentFret {
     
     constructor(string, fretNum) {
-
         this.string = string;
         this.id = fretNum;
         this.container = this.draw();
