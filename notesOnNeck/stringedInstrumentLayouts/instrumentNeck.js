@@ -111,6 +111,8 @@ class InstrumentNeck {
                                 
                 //create new NoteMarker and place in matching fret
                 marker = new NoteMarker(matchingFret);
+                console.log(matchingFret);
+                
                 matchingFret.append(marker.container);
             }
         }

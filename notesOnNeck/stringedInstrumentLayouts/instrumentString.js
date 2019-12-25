@@ -28,7 +28,7 @@ class InstrumentString{
         for(let i=this.neck.startFret; i<this.neck.endFret; i++){
             let fretNum = i;
 
-            let fret = new InstrumentFret(this, fretNum);
+            let fret = new InstrumentFret(this.neck, this, fretNum);
 
             this.container.append(fret.container);
 

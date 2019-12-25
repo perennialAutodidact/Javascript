@@ -1,6 +1,6 @@
 class InstrumentFret {
-    
-    constructor(string, fretNum) {
+    constructor(neck, string, fretNum) {
+        this.neck = neck;
         this.string = string;
         this.id = fretNum;
         this.container = this.draw();
@@ -65,7 +65,7 @@ class InstrumentFret {
             curString = teoria.note(this.string.name);
 
             // intervals with 'A4' vs 'd5' 
-            if(this.string.neck.markedNotes.includes('d5')){
+            if(this.neck.markedNotes.includes('d5')){
 
                 // name of interval from open note to current fret
                 curInterval =  intervalsWithDim5[this.id%12];
