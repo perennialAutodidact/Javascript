@@ -7,7 +7,10 @@ class InstrumentNeck {
         this.inlays = [3,5,7,9,12,15];
         this.curKey = teoria.note('cb');
 
-        this.markedNotes = this.curKey.scale('locrian').simple();
+        this.scale = this.curKey.scale('locrian');
+        this.markedNotes = this.scale.simple();
+
+        console.log(this.scale.scale);
         
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
@@ -67,7 +70,7 @@ class InstrumentNeck {
         notes = this.markedNotes.slice();
 
         for(i in notes){
-            console.log(notes[i]);
+            // console.log(notes[i]);
             note = teoria.note(notes[i])
             enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(','); 
 
@@ -110,8 +113,8 @@ class InstrumentNeck {
                 matchingFret = matchingFrets[i];
                                 
                 //create new NoteMarker and place in matching fret
-                marker = new NoteMarker(matchingFret);
-                console.log(matchingFret);
+                marker = new NoteMarker(neck, matchingFret);
+                // console.log(matchingFret);
                 
                 matchingFret.append(marker.container);
             }
