@@ -7,42 +7,39 @@ class NoteMarker {
         // console.log(`fret: ${fret}`);
         this.container = this.draw();
         this.intervalFromTonic = this.getIntervalFromTonic();
+        // this.selectColor();
     }
 
     draw(){
         let newMarker = document.createElement('div');
         newMarker.classList.add('note-marker');
 
-
         return newMarker
     }
 
-    colorMarker() {
+    selectColor() {
         const colors = {
-            'P1': '#00000',
-            'm2': '#00000',
-            'M2':'#00000',
-            'm3':'#00000',
-             'M3':'#00000',
-             'P4':'#00000',
-             'A4':'#00000',
-             'P5':'#00000',
-             'm6':'#00000',
-             'M6':'#00000',
-             'm7':'#00000',
-             'M7':'#00000',
+            'P1':'#eeec28',
+            'm2':'#ec9828',
+            'M2':'#cc2638',
+            'm3':'#ca1574',
+            'M3':'#752b78',
+            'P4':'#4b448a',
+            'A4':'#1c72a5',
+            'P5':'#0fa96d',
+            'm6':'#67bb41',
+            'M6':'#bbdb2e',
+            'm7':'#00000',
+            'M7':'#00000',
         }
     }
 
     getIntervalFromTonic(){
-    //     // convert fret note name to an enharmonic
-    //     // in the current key if not already in key.
-    //     // Then, find interval distance from key's tonic
-    //     // to the converted note.
-        
-        // console.log(`note: ${this.fret.getAttribute('name')}`);
-        // console.log(this.scaleFormula);
-        
+        // convert fret note name to an enharmonic
+        // in the current key if not already in key.
+        // Then, find interval distance from key's tonic
+        // to the converted note.
+
         let note = teoria.note(this.fret.getAttribute('name')),
             enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(','),
             enharmonic,
@@ -55,12 +52,7 @@ class NoteMarker {
 
         if(this.scale.includes(note.toString().slice(0,-1))){
             intervalFromTonic = tonic.interval(teoria.note(note.toString().slice(0,-1)));
-            // console.log(`tonic: ${tonic}`);
-            // // console.log(`scale: ${this.scale}`);
-            // console.log(`interval: ${tonic.interval(teoria.note(note.toString().slice(0,-1)))}`);
-            
-            // // console.log(`intervalFromTonic: ${intervalFromTonic}`);
-            
+
         } else {
             for(let i in enharmonics){
                 enharmonic = enharmonics[i];
@@ -72,13 +64,7 @@ class NoteMarker {
                                 note.toString().slice(0,-1)
                     ));
                 }
-                
             }
-            // console.log(`enharmonics: ${enharmonics}`);
         }
-        
-    //     const intervalsWithAug4 = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'A4', 'P5', 'm6', 'M6', 'm7', 'M7'];
-    //     const intervalsWithDim5 = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'D5', 'P5', 'm6', 'M6', 'm7', 'M7'];
-        
     }
 }

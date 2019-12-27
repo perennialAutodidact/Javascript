@@ -2,6 +2,21 @@
     box-sizing: border-box;
 }
 
+:root {
+    --P1-color: #eeeb2c;
+    --m2-color: #ec9828;
+    --M2-color: #d95628;
+    --m3-color: #d3263a;
+    --M3-color: #ca1574;
+    --P4-color: #7c2b7a;
+    --d5-color: #7c2b7a;
+    --P5-color: #4b448a;
+    --m6-color: #1c72a5;
+    --M6-color: #0da5a6;
+    --m7-color: #0fa96d;
+    --M7-color: #67bb41;
+}
+
 body {
     align-items: center;
     background-color: rgb(10,125,100);
