@@ -13,7 +13,25 @@ class NoteMarker {
         let newMarker = document.createElement('div');
         newMarker.classList.add('note-marker');
 
+
         return newMarker
+    }
+
+    colorMarker() {
+        const colors = {
+            'P1': '#00000',
+            'm2': '#00000',
+            'M2':'#00000',
+            'm3':'#00000',
+             'M3':'#00000',
+             'P4':'#00000',
+             'A4':'#00000',
+             'P5':'#00000',
+             'm6':'#00000',
+             'M6':'#00000',
+             'm7':'#00000',
+             'M7':'#00000',
+        }
     }
 
     getIntervalFromTonic(){
@@ -34,18 +52,26 @@ class NoteMarker {
         // if note is in scaleFormula, 
         // get interval from the tonic to that note
         // otherwise, find enharminc notes and check them
-        
-        console.log(`tonic: ${tonic}`);
-        // console.log(`scale: ${this.scale}`);
-        console.log(`note: ${tonic.interval(teoria.note(note.toString().slice(0,-1)))}`);
-        
+
         if(this.scale.includes(note.toString().slice(0,-1))){
-            // intervalFromTonic = tonic.interval(note);
-            console.log(`intervalFromTonic: ${intervalFromTonic}`);
+            intervalFromTonic = tonic.interval(teoria.note(note.toString().slice(0,-1)));
+            // console.log(`tonic: ${tonic}`);
+            // // console.log(`scale: ${this.scale}`);
+            // console.log(`interval: ${tonic.interval(teoria.note(note.toString().slice(0,-1)))}`);
+            
+            // // console.log(`intervalFromTonic: ${intervalFromTonic}`);
             
         } else {
             for(let i in enharmonics){
                 enharmonic = enharmonics[i];
+                
+                if(this.scale.includes(enharmonic)){
+                    intervalFromTonic = 
+                        tonic.interval(
+                            teoria.note(
+                                note.toString().slice(0,-1)
+                    ));
+                }
                 
             }
             // console.log(`enharmonics: ${enharmonics}`);
