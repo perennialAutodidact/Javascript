@@ -29,7 +29,8 @@ const updateNeck = () => {
     key = keyInput.value;
 
     neck.curKey = teoria.note(key);
-    neck.markedNotes = neck.curKey.scale(scaleName).simple();
+    neck.scale = neck.curKey.scale(scaleName);
+    neck.markedNotes = neck.scale.simple()
 
     neck.removeNoteMarkers();
 
@@ -46,7 +47,11 @@ keyInput = document.querySelector('#key-input');
 
 keyInput.addEventListener('change', updateNeck);
 
-let n1 = teoria.note('e2')
-let n2 = teoria.note('c3');
+let n1 = teoria.note('cb')
+// let n2 = teoria.note('');
 
-console.log(n1.interval(n2).toString());
+// console.log(n1.enharmonics().toString());
+
+// console.log(n1.interval(n2).toString());
+console.log(n1.scale('locrian').scale);
+

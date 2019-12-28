@@ -7,7 +7,9 @@ class NoteMarker {
         // console.log(`fret: ${fret}`);
         this.container = this.draw();
         this.intervalFromTonic = this.getIntervalFromTonic();
-        // this.selectColor();
+        this.selectColor();
+
+        // console.log(`interval: ${this.intervalFromTonic}`);
     }
 
     draw(){
@@ -19,52 +21,61 @@ class NoteMarker {
 
     selectColor() {
         const colors = {
-            'P1':'#eeec28',
-            'm2':'#ec9828',
-            'M2':'#cc2638',
-            'm3':'#ca1574',
-            'M3':'#752b78',
-            'P4':'#4b448a',
-            'A4':'#1c72a5',
-            'P5':'#0fa96d',
-            'm6':'#67bb41',
-            'M6':'#bbdb2e',
-            'm7':'#00000',
-            'M7':'#00000',
+            'P1':'--P1-color',
+            'm2':'--m2-color',
+            'M2':'--M2-color',
+            'm3':'--m3-color',
+            'M3':'--M3-color',
+            'P4':'--P4-color',
+            'A4':'--d5-color',
+            'd5':'--d5-color',
+            'P5':'--P5-color',
+            'm6':'--m6-color',
+            'M6':'--M6-color',
+            'm7':'--m7-color',
+            'M7':'--M7-color',
         }
+        
+        this.container.style.backgroundColor = `var(${colors[this.intervalFromTonic]})`
     }
 
     getIntervalFromTonic(){
-        // convert fret note name to an enharmonic
-        // in the current key if not already in key.
-        // Then, find interval distance from key's tonic
-        // to the converted note.
+        // if note is in scale,
+        // get interval from the tonic to that note
+        // otherwise, find enharmonic notes and check them
 
-        let note = teoria.note(this.fret.getAttribute('name')),
+        let note = teoria.note(`${this.fret.getAttribute('name')}${this.fret.dataset.octave}`),
             enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(','),
             enharmonic,
-            tonic = teoria.note(this.scale[0]),
+            tonic = teoria.note(`${this.scale[0]}`),
             intervalFromTonic;
-        
-        // if note is in scaleFormula, 
-        // get interval from the tonic to that note
-        // otherwise, find enharminc notes and check them
 
         if(this.scale.includes(note.toString().slice(0,-1))){
+
             intervalFromTonic = tonic.interval(teoria.note(note.toString().slice(0,-1)));
+            this.container.dataset.interval = intervalFromTonic;
 
         } else {
+
             for(let i in enharmonics){
-                enharmonic = enharmonics[i];
+                enharmonic = teoria.note(enharmonics[i]);
                 
-                if(this.scale.includes(enharmonic)){
+                // if enharmonic name is in scale, find interval from tonic
+                if(this.scale.includes(enharmonic.toString().slice(0,-1))){
                     intervalFromTonic = 
                         tonic.interval(
-                            teoria.note(
-                                note.toString().slice(0,-1)
-                    ));
+                        teoria.note(
+                            enharmonic.toString().slice(0,-1)));
+                        }
+                    }
                 }
+
+            // invert descending intervals caused by varying octaves
+            if(intervalFromTonic.toString().indexOf('-') != -1){
+                intervalFromTonic = intervalFromTonic.invert();
             }
-        }
+            this.container.dataset.interval = intervalFromTonic;
+
+        return intervalFromTonic
     }
 }

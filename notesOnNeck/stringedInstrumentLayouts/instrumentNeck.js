@@ -5,9 +5,9 @@ class InstrumentNeck {
         this.startFret = startFret;
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12,15];
-        this.curKey = teoria.note('cb');
+        this.curKey = teoria.note('c');
 
-        this.scale = this.curKey.scale('locrian');
+        this.scale = this.curKey.scale('ionian');
         this.markedNotes = this.scale.simple();
 
         console.log(this.scale.scale);

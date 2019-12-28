@@ -64,7 +64,7 @@ class InstrumentFret {
         if(this.string.name != 'invisible'){
             curString = teoria.note(this.string.name);
 
-            // intervals with 'A4' vs 'd5' 
+            // intervals with 'A4' vs 'd5' (mainly for lydian vs locrian)
             if(this.neck.markedNotes.includes('d5')){
 
                 // name of interval from open note to current fret
@@ -75,6 +75,7 @@ class InstrumentFret {
 
             // actual interval object from open note to current fret
             fretName = curString.interval(curInterval);
+
             
             // raise octave of 12th fret to avoid modulus making id=0
             if(this.id === 12){
