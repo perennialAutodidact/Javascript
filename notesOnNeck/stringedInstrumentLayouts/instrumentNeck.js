@@ -36,6 +36,7 @@ class InstrumentNeck {
             // Returns string names 
             return instruments[this.instrument][this.tuning]
         } else if(instrument == 'all'){
+            // returns instrument names
             return Object.keys(instruments)
         } else {
             // returns list of tuning names
@@ -44,16 +45,11 @@ class InstrumentNeck {
     };
     
     drawStrings(){
-        console.log(this.stringNames.length);
-        
         let strings = [];
         for(let i=0; i<this.stringNames.length + 1; i++){
             
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
-
-            console.log(`string: ${string}`);
-            
 
             this.container.prepend(string.container);
             strings.push(string);

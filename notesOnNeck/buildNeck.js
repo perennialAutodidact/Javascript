@@ -14,7 +14,6 @@ let instrumentInput = document.querySelector('#instrument-input'),
     key;
 
 for(let i in instruments){
-
     instrument = instruments[i]; 
 
     option = document.createElement('option');
@@ -24,20 +23,29 @@ for(let i in instruments){
     instrumentInput.append(option);
 }
 
+const updateTunings = (newInstrument) => {
+    while(tuningInput.hasChildNodes()){
+        tuningInput.removeChild(tuningInput.lastChild);
+    }
+    
+    tunings = neck.getInstrumentTunings(newInstrument);
 
-for(tuning in tunings){
-    
-    option = document.createElement('option');
-    option.value = tuning;
-    option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
-    
-    tuningInput.append(option);
+    for(tuning in tunings){
+
+        option = document.createElement('option');
+        option.value = tuning;
+        option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
+        
+        tuningInput.append(option);
+    }
 }
+
+updateTunings(neck.instrument);
 
 // grabs current input for scale name and key,
 // sends that info to the neck object
 // then removes old markers and places new ones
-const updateNeck = () => {
+const updateScale = () => {
     scaleName = scaleInput.value;
     key = keyInput.value;
 
@@ -49,14 +57,14 @@ const updateNeck = () => {
 
     neck.placeNoteMarkers();
 }
-
-
-
 neck.placeNoteMarkers();
 
-instrumentInput.addEventListener('change', function(){
+
+const updateInstrument = () => {
     let newInstrument = instrumentInput.value;
     let newTuning = tuningInput.value;
+    
+    // tuningInput.selectedIndex = newTuning;
 
     for(let i in neck.strings){
         neck.strings[i].container.remove();
@@ -64,20 +72,31 @@ instrumentInput.addEventListener('change', function(){
 
     neck.instrument = newInstrument;
     neck.tuning = newTuning;
+
     neck.stringNames = neck.getInstrumentTunings();
+
     neck.totalStrings = neck.stringNames.length;
     neck.strings = neck.drawStrings();
     
-    updateNeck();
+    updateScale();
+}
+
+instrumentInput.addEventListener('change', function(){
+    newInstrument = instrumentInput.value;
+    
+    updateTunings(newInstrument);
+    updateInstrument();
 });
 
-tuningInput.addEventListener('change', updateNeck);
-scaleInput.addEventListener('change', updateNeck);
-keyInput.addEventListener('change', updateNeck);
+tuningInput.addEventListener('change', function(){
+    updateInstrument();
+});
 
-let n1 = teoria.note('cb')
+scaleInput.addEventListener('change', updateScale);
+keyInput.addEventListener('change', updateScale);
+
+let n1 = teoria.note('cb');
 // let n2 = teoria.note('');
-
 
 // console.log(n1.enharmonics().toString());
 
