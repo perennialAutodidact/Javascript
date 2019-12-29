@@ -5,13 +5,11 @@ class InstrumentNeck {
         this.startFret = startFret;
         this.endFret = endFret;
         this.inlays = [3,5,7,9,12,15];
-        this.curKey = teoria.note('c');
 
+        this.curKey = teoria.note('c');
         this.scale = this.curKey.scale('ionian');
         this.markedNotes = this.scale.simple();
 
-        console.log(this.scale.scale);
-        
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();
         this.totalStrings = this.stringNames.length;
@@ -37,6 +35,8 @@ class InstrumentNeck {
         if(instrument == ''){
             // Returns string names 
             return instruments[this.instrument][this.tuning]
+        } else if(instrument == 'all'){
+            return Object.keys(instruments)
         } else {
             // returns list of tuning names
             return instruments[instrument]
@@ -44,11 +44,16 @@ class InstrumentNeck {
     };
     
     drawStrings(){
+        console.log(this.stringNames.length);
+        
         let strings = [];
         for(let i=0; i<this.stringNames.length + 1; i++){
             
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
+
+            console.log(`string: ${string}`);
+            
 
             this.container.prepend(string.container);
             strings.push(string);

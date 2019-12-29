@@ -23,7 +23,7 @@ class InstrumentString{
         return newString
     }
 
-    createFrets() {        
+    createFrets() {
         let frets = [];
         for(let i=this.neck.startFret; i<this.neck.endFret; i++){
             let fretNum = i;
