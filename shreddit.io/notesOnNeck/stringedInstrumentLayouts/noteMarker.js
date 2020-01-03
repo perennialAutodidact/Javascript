@@ -30,8 +30,10 @@ class NoteMarker {
             'A4':'--d5-color',
             'd5':'--d5-color',
             'P5':'--P5-color',
+            'A5':'--m6-color',
             'm6':'--m6-color',
             'M6':'--M6-color',
+            'A6':'--m7-color',
             'm7':'--m7-color',
             'M7':'--M7-color',
         }
