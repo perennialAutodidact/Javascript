@@ -1,0 +1,156 @@
+:root {
+    /* RGB */
+    --color1: rgba(0, 0, 0, 1);
+    --color2: rgba(12, 24, 33, 1);
+    --color3: rgba(27, 42, 65, 1);
+    --color4: rgba(50, 74, 95, 1);
+    --color5: rgba(204, 201, 220, 1);
+
+    --bill-hundred-bg: rgb(34, 55, 22);
+    --bill-fifty-bg: rgb(67, 109, 44);
+    --bill-twenty-bg: rgb(100, 163, 65);
+    --bill-ten-bg: rgb(134, 205, 96);
+    --bill-five-bg: rgb(170, 219, 143);
+    --bill-one-bg: rgb(206, 234, 191);
+
+    --bill-hundred-border: rgb(15, 32, 5);
+    --bill-fifty-border: var(--bill-hundred-bg);
+    --bill-twenty-border: var(--bill-fifty-bg);
+    --bill-ten-border: var(--bill-twenty-bg);
+    --bill-five-border: var(--bill-ten-bg);
+    --bill-one-border: var(--bill-five-bg);
+
+    --coin-quarter-bg: rgb(59, 59, 59);
+    --coin-dime-bg: rgb(92, 92, 92);
+    --coin-nickel-bg: rgb(139, 139, 139);
+    --coin-penny-bg: rgb(156, 106, 59);
+
+    --coin-quarter-border: rgb(39, 38, 38);
+    --coin-dime-border: var(--coin-quarter-bg);
+    --coin-nickel-border: var(--coin-dime-bg);
+    --coin-penny-border: rgb(112, 65, 21);
+
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    background-color: var(--color3);
+    height: 100vh;
+    width: 100vw;
+}
+
+.section {
+    background-color: var(--color4);
+    height: 100vh;
+    width: 30vw;
+}
+
+.currency-legend {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bills {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bill {
+    align-items: center;
+    display: flex;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    height: 7vh;
+    justify-content: center;
+    margin: 5px;
+    width: 10vw;
+}
+
+.hundred {
+    background-color: var(--bill-hundred-bg);
+    border: 2px solid var(--bill-hundred-border);
+}
+
+.fifty {
+    background-color: var(--bill-fifty-bg);
+    border: 2px solid var(--bill-fifty-border);
+}
+
+.twenty {
+    background-color: var(--bill-twenty-bg);
+    border: 2px solid var(--bill-twenty-border);
+}
+
+.ten {
+    background-color: var(--bill-ten-bg);
+    border: 2px solid var(--bill-ten-border);
+}
+
+.five {
+    background-color: var(--bill-five-bg);
+    border: 2px solid var(--bill-five-border);
+}
+
+.one {
+    background-color: var(--bill-one-bg);
+    border: 2px solid var(--bill-one-border);
+}
+
+.coins {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.coin {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    justify-content: center;
+    margin: 5px;
+}
+
+.quarter {
+    background-color: var(--coin-quarter-bg);
+    border: 2px solid var(--coin-quarter-border);
+    height: 10vh;
+    max-height: 10vw;
+    max-width: 10vh;
+    width: 10vw;
+}
+
+.dime {
+    background-color: var(--coin-dime-bg);
+    border: 2px solid var(--coin-dime-border);
+    height: 6vh;
+    max-height: 6vw;
+    max-width: 6vh;
+    width: 6vw;
+}
+
+.nickel {
+    background-color: var(--coin-nickel-bg);
+    border: 2px solid var(--coin-nickel-border);
+    height: 8vh;
+    max-height: 8vw;
+    max-width: 8vh;
+    width: 8vw;
+}
+
+.penny {
+    background-color: var(--coin-penny-bg);
+    border: 2px solid var(--coin-penny-border);
+    height: 7vh;
+    max-height: 7vw;
+    max-width: 7vh;
+    width: 7vw;
+}
