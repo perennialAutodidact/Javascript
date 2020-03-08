@@ -43,14 +43,40 @@ body {
 }
 
 .section {
+    align-items: center;
     background-color: var(--color4);
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     width: 30vw;
+}
+
+.till {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10vh;
+    padding: 15px;
+}
+
+.till input {
+    background-color: var(--color5);
+    font-size: 2rem;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+}
+
+.till #submit {
+
 }
 
 .currency-legend {
     display: flex;
     justify-content: space-around;
+    padding: 15px;
+    width: 100%;
 }
 
 .bills {
@@ -64,6 +90,8 @@ body {
     align-items: center;
     display: flex;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
     height: 7vh;
     justify-content: center;
     margin: 5px;
