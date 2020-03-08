@@ -5,10 +5,13 @@ let randomTotal = document.querySelector('.random-total'),
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
 const updateTotal = (total, char) => {
+
     let isDigit = new RegExp(/([0-9])/),
         nonDigit = new RegExp(/([\D])/g),
         leadingZeros = new RegExp(/(^0+)/),
-        preDecimal, postDecimal;
+        preTemp, postDecimal, 
+        preDecimal = [],
+        count;
 
     // Remove leading zeros and non-digit characters,
     // convert to array
@@ -24,12 +27,24 @@ const updateTotal = (total, char) => {
         total = total.join('');
 
     } else if (total.length == 2){
+        
         total.unshift('0', '.')
         total = total.join('');
 
     } else {
-        preDecimal  = total.splice(0, total.length - 2);
+        preTemp  = total.splice(0, total.length - 2);
         postDecimal = total.splice(total.length - 2, total.length)
+
+        count = 0
+        for(let i = preTemp.length - 1 ; i >= 0; i--){
+            
+            if(count % 3 == 0 && count != 0){
+                preDecimal.unshift(',')
+            }
+            preDecimal.unshift(preTemp[i])
+
+            count++;
+        }
 
         total = preDecimal.join('') + '.' + postDecimal.join('')
     }
@@ -46,20 +61,24 @@ totalInput.addEventListener('focusout', () => {
 totalInput.addEventListener('input', (e) => {
     let newValue,
         digit = new RegExp(/([0-9])/),
-        newChar = e.data;
+        newChar;
 
+    if(e.data){
+        newChar = e.data;
+    } else {
+        newChar = '0';
+    }
+    
     if(digit.test(newChar) && newChar != '$'){
         newValue = updateTotal(totalInput.value, newChar);
     } else {
-        newValue = totalInput.value.replace(newChar, '')
-
         if(newChar == '$' || '.'){
+            newValue = totalInput.value.replace(newChar, '')
             newValue = totalInput.value.split('')
             newValue.pop()
             newValue = newValue.join('')
         }
     }
-
+    
     totalInput.value = `${newValue}`;
-
 });
