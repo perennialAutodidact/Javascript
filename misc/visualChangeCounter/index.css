@@ -50,7 +50,7 @@ body {
 }
 
 #section1 {
-    background-color: var(--color4);
+    background-color: var(--color3);
     height: 100vh;
     width: 30vw;
 }
@@ -72,8 +72,13 @@ body {
     width: 80%;
 }
 
-.till #submit {
-
+#submit {
+    background-color: var(--color5);
+    border-radius: 5px;
+    font-size: 1.5rem;
+    padding: 15px;
+    text-align: center;
+    width: 70%;
 }
 
 .currency-legend {
@@ -220,7 +225,7 @@ body {
     border-bottom:1px solid var(--color5);
     border-left:1px solid var(--color5);
     font-weight: bold;
-    height: 90%;
+    height: 100%;
     width: 90%;
 }
 
@@ -249,14 +254,54 @@ body {
     height: 100%;
 }
 
+#col-one {
+    border-right: 1px dashed var(--color3)
+}
 .graph-col { 
+    align-items: center;
     border-right: 1px dotted var(--color3);
+    display: flex;
+    flex-direction: column-reverse;
     height: 100%;
     width: 100px;
 }
 
-#col-one {
-    border-right: 1px dashed var(--color3)
+.graph-item {
+    height: 10%;
+    margin-top: 2px;
+    width: 80%;
+}
+
+.graph-coin {
+    border-radius: 50%;
+}
+
+.graph-quarter {
+    height: 8vh;
+    max-height: 8vw;
+    max-width: 8vh;
+    width: 8vw;
+}
+
+.graph-dime {
+    height: 5vh;
+    max-height: 5vw;
+    max-width: 5vh;
+    width: 5vw;
+}
+
+.graph-nickel {
+    height: 7vh;
+    max-height: 7vw;
+    max-width: 7vh;
+    width: 7vw;
+}
+
+.graph-penny {
+    height: 6vh;
+    max-height: 6vw;
+    max-width: 6vh;
+    width: 6vw;
 }
 
 .denom-labels {
@@ -283,10 +328,3 @@ body {
     width: 40%;
 }
 
-.graph-bill {
-
-}
-
-.graph-coin {
-
-}

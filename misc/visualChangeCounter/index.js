@@ -2,14 +2,58 @@ let randomTotal = document.querySelector('.random-total'),
     tillMessage = document.querySelector('.till .message'),
     totalInput  = document.querySelector('.till input');
 
-
-class Graph {
-    constructor() {
-
-    }
+const clickHandler = (event) => {
+    console.log(event);
 }
 
+class Graph {
+    constructor(container, name) {
+        this.container = container;
+        this.name = name;
+        this.columns = this.container.querySelectorAll('.graph .graph-col')
+    }
 
+    addItem(column){
+        
+        let item  = document.createElement('div'),
+            denom = column.dataset.denom,
+            coins = ['quarter', 'dime', 'nickel', 'penny'];
+        
+        console.log(denom);
+        item.classList.add('graph-item', denom);
+        if(coins.includes(denom)){
+            item.classList.add('graph-coin', `graph-${denom}`)
+        }
+        console.log(item);
+        
+        item.dataset.value = column.dataset.value;
+        column.prepend(item);
+    }
+
+}
+
+let columnFifty = document.querySelector('.payment #col-fifty'),
+    columnQuarter = document.querySelector('.payment #col-quarter'),
+    columnDime = document.querySelector('.payment #col-dime'),
+    columnNickel = document.querySelector('.payment #col-nickel'),
+    columnPenny = document.querySelector('.payment #col-penny');
+
+let paymentGraph = new Graph(document.querySelector('.payment'), 'payment')
+paymentGraph.addItem(columnFifty)
+paymentGraph.addItem(columnFifty)
+paymentGraph.addItem(columnFifty)
+paymentGraph.addItem(columnFifty)
+paymentGraph.addItem(columnFifty)
+paymentGraph.addItem(columnQuarter)
+paymentGraph.addItem(columnQuarter)
+paymentGraph.addItem(columnQuarter)
+paymentGraph.addItem(columnDime)
+paymentGraph.addItem(columnDime)
+paymentGraph.addItem(columnNickel)
+paymentGraph.addItem(columnNickel)
+paymentGraph.addItem(columnPenny)
+
+console.log(paymentGraph.columns);
 
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
@@ -91,10 +135,6 @@ totalInput.addEventListener('input', (e) => {
     
     totalInput.value = `${newValue}`;
 });
-
-const placeMoney = () => {
-
-}
 
 // collects number of each
 // denomination of money that 

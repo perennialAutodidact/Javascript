@@ -25,37 +25,37 @@
             
             <div class="currency-legend">
                 <div class="bills">
-                    <div class="bill hundred">
+                    <div class="bill hundred graph-button">
                         <div>100</div>
                     </div>
-                    <div class="bill fifty">
+                    <div class="bill fifty graph-button">
                         <div>50</div>
                     </div>
-                    <div class="bill twenty">
+                    <div class="bill twenty graph-button">
                         <div>20</div>
                     </div>
-                    <div class="bill ten">
+                    <div class="bill ten graph-button">
                         <div>10</div>
                     </div>
-                    <div class="bill five">
+                    <div class="bill five graph-button">
                         <div>5</div>
                     </div>
-                    <div class="bill one">
+                    <div class="bill one graph-button">
                         <div>1</div>
                     </div>
                 </div>
                 
                 <div class="coins">
-                    <div class="coin quarter quarter-size">
+                    <div class="coin quarter quarter-size graph-button">
                         <div>25</div>
                     </div>
-                    <div class="coin dime dime-size">
+                    <div class="coin dime dime-size graph-button">
                         <div>10</div>
                     </div>
-                    <div class="coin nickel nickel-size">
+                    <div class="coin nickel nickel-size graph-button">
                         <div>5</div>
                     </div>
-                    <div class="coin penny penny-size">
+                    <div class="coin penny penny-size graph-button">
                         <div>1</div>
                     </div>
                 </div>
@@ -69,16 +69,17 @@
                 <h1>Payment</h1>
                 <div class="labels">
                     <div class="graph">
-                        <div class="graph-col" id="col-hundred"></div>
-                        <div class="graph-col" id="col-fifty"></div>
-                        <div class="graph-col" id="col-twenty"></div>
-                        <div class="graph-col" id="col-ten"></div>
-                        <div class="graph-col" id="col-five"></div>
-                        <div class="graph-col" id="col-one"></div>
-                        <div class="graph-col" id="col-quarter"></div>
-                        <div class="graph-col" id="col-dime"></div>
-                        <div class="graph-col" id="col-nickel"></div>
-                        <div class="graph-col" id="col-penny"></div>
+                        <div class="graph-col" id="col-hundred" data-denom="hundred" data-value=100></div>
+                        <div class="graph-col" id="col-fifty" data-denom="fifty" data-value=50></div>
+                        <div class="graph-col" id="col-twenty" data-denom="twenty" data-value=20></div>
+                        <div class="graph-col" id="col-ten" data-denom="ten" data-value=10></div>
+                        <div class="graph-col" id="col-five" data-denom="five" data-value=5></div>
+                        <div class="graph-col" id="col-one" data-denom="one" data-value=1></div>
+
+                        <div class="graph-col" id="col-quarter" data-denom="quarter" data-value=.25></div>
+                        <div class="graph-col" id="col-dime" data-denom="dime" data-value=.1></div>
+                        <div class="graph-col" id="col-nickel" data-denom="nickel" data-value=.05></div>
+                        <div class="graph-col" id="col-penny" data-denom="penny" data-value=.01></div>
                     </div>
 
                     <div class="denom-labels">
