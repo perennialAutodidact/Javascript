@@ -1,10 +1,26 @@
-let randomTotal = document.querySelector('.random-total'),
-    tillMessage = document.querySelector('.till .message'),
-    totalInput  = document.querySelector('.till input');
+let randomTotal    = document.querySelector('.random-total'),
+    tillMessage    = document.querySelector('.till .message'),
+    totalInput     = document.querySelector('.till input'),
+    currencyLegend = document.querySelector('.currency-legend');
 
-const clickHandler = (event) => {
-    console.log(event);
+const triggerAddItem = (event) => {
+    let column,
+        denom;
+
+    if(event.target.tagName == 'DIV'){
+        if(event.target.dataset.denom){
+            denom = event.target.dataset.denom;
+        } else {
+            denom = event.target.parentElement.dataset.denom;
+        }
+        column = document.querySelector(`.payment #col-${denom}`)
+        console.log(`column: `, column);
+        
+        paymentGraph.addItem(column);
+    }
 }
+
+currencyLegend.addEventListener('click', triggerAddItem, false);
 
 class Graph {
     constructor(container, name) {
@@ -14,17 +30,18 @@ class Graph {
     }
 
     addItem(column){
+        console.log(`column: ${column}`);
         
         let item  = document.createElement('div'),
             denom = column.dataset.denom,
             coins = ['quarter', 'dime', 'nickel', 'penny'];
         
-        console.log(denom);
+            item.classList.add('item-hidden');
         item.classList.add('graph-item', denom);
         if(coins.includes(denom)){
             item.classList.add('graph-coin', `graph-${denom}`)
         }
-        console.log(item);
+        item.classList.remove('item-hidden');
         
         item.dataset.value = column.dataset.value;
         column.prepend(item);
@@ -38,7 +55,8 @@ let columnFifty = document.querySelector('.payment #col-fifty'),
     columnNickel = document.querySelector('.payment #col-nickel'),
     columnPenny = document.querySelector('.payment #col-penny');
 
-let paymentGraph = new Graph(document.querySelector('.payment'), 'payment')
+let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
+
 paymentGraph.addItem(columnFifty)
 paymentGraph.addItem(columnFifty)
 paymentGraph.addItem(columnFifty)

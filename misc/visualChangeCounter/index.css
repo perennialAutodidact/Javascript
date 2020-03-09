@@ -218,6 +218,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 40vh;
+    max-height: 40vh;
     width: 100%;
 }
 
@@ -252,6 +253,7 @@ body {
 .graph {
     display: flex;
     height: 100%;
+    max-height: 50vh;
 }
 
 #col-one {
@@ -263,46 +265,54 @@ body {
     display: flex;
     flex-direction: column-reverse;
     height: 100%;
-    width: 100px;
+    width: 10%;
 }
 
 .graph-item {
     height: 10%;
     margin-top: 2px;
+    transition: all 10 ease-in-out;
     width: 80%;
 }
+
+.item-hidden {
+    opacity: 0;
+}
+
 
 .graph-coin {
     border-radius: 50%;
 }
 
 .graph-quarter {
-    height: 8vh;
-    max-height: 8vw;
-    max-width: 8vh;
-    width: 8vw;
-}
-
-.graph-dime {
-    height: 5vh;
-    max-height: 5vw;
-    max-width: 5vh;
-    width: 5vw;
-}
-
-.graph-nickel {
-    height: 7vh;
-    max-height: 7vw;
-    max-width: 7vh;
-    width: 7vw;
-}
-
-.graph-penny {
     height: 6vh;
     max-height: 6vw;
     max-width: 6vh;
     width: 6vw;
 }
+
+.graph-dime {
+    height: 3vh;
+    max-height: 3vw;
+    max-width: 3vh;
+    width: 3vw;
+}
+
+.graph-nickel {
+    height: 4vh;
+    max-height: 4vw;
+    max-width: 4vh;
+    width: 4vw;
+}
+
+.graph-penny {
+    height: 3vh;
+    margin: 0;
+    max-height: 3vw;
+    max-width: 3vh;
+    width: 3vw;
+}
+
 
 .denom-labels {
     display: flex;
