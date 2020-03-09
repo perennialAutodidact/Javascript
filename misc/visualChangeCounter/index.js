@@ -2,6 +2,15 @@ let randomTotal = document.querySelector('.random-total'),
     tillMessage = document.querySelector('.till .message'),
     totalInput  = document.querySelector('.till input');
 
+
+class Graph {
+    constructor() {
+
+    }
+}
+
+
+
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
 const updateTotal = (total, char) => {
@@ -82,3 +91,22 @@ totalInput.addEventListener('input', (e) => {
     
     totalInput.value = `${newValue}`;
 });
+
+const placeMoney = () => {
+
+}
+
+// collects number of each
+// denomination of money that 
+// the user has selected for payment
+const compilePayment = () => {
+
+}
+
+// Calculate change due
+// returns object with quantities 
+// for each denomination
+// '$ 24.56
+const makeChange = (amountDue, amountPaid) => {
+
+}

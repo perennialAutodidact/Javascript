@@ -38,15 +38,19 @@ body {
 
 .container {
     background-color: var(--color3);
+    display: flex;
     height: 100vh;
     width: 100vw;
 }
 
 .section {
     align-items: center;
-    background-color: var(--color4);
     display: flex;
     flex-direction: column;
+}
+
+#section1 {
+    background-color: var(--color4);
     height: 100vh;
     width: 30vw;
 }
@@ -150,35 +154,139 @@ body {
 .quarter {
     background-color: var(--coin-quarter-bg);
     border: 2px solid var(--coin-quarter-border);
+}
+
+.dime {
+    background-color: var(--coin-dime-bg);
+    border: 2px solid var(--coin-dime-border);
+}
+
+.nickel {
+    background-color: var(--coin-nickel-bg);
+    border: 2px solid var(--coin-nickel-border);
+}
+
+.penny {
+    background-color: var(--coin-penny-bg);
+    border: 2px solid var(--coin-penny-border);
+}
+
+.quarter-size {
     height: 10vh;
     max-height: 10vw;
     max-width: 10vh;
     width: 10vw;
 }
 
-.dime {
-    background-color: var(--coin-dime-bg);
-    border: 2px solid var(--coin-dime-border);
+
+.dime-size {
     height: 6vh;
     max-height: 6vw;
     max-width: 6vh;
     width: 6vw;
 }
 
-.nickel {
-    background-color: var(--coin-nickel-bg);
-    border: 2px solid var(--coin-nickel-border);
+.nickel-size {
     height: 8vh;
     max-height: 8vw;
     max-width: 8vh;
     width: 8vw;
 }
 
-.penny {
-    background-color: var(--coin-penny-bg);
-    border: 2px solid var(--coin-penny-border);
+.penny-size {
     height: 7vh;
     max-height: 7vw;
     max-width: 7vh;
     width: 7vw;
+}
+
+#display {
+    background-color: var(--color4);
+    color: var(--color);
+    display: flex;
+    height: 100vh;
+    width: 70vw;
+}
+
+.payment {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    width: 100%;
+}
+
+.labels {
+    border-bottom:1px solid var(--color5);
+    border-left:1px solid var(--color5);
+    font-weight: bold;
+    height: 90%;
+    width: 90%;
+}
+
+.bill-labels {
+    display: flex;
+    width: 60%;
+}
+
+.bill-label {
+    text-align: center;
+    width: 20%;
+}
+
+.coin-labels {
+    display: flex;
+    width: 40%;
+}
+
+.coin-label {
+    text-align: center;
+    width: 25%;
+}
+
+.graph {
+    display: flex;
+    height: 100%;
+}
+
+.graph-col { 
+    border-right: 1px dotted var(--color3);
+    height: 100%;
+    width: 100px;
+}
+
+#col-one {
+    border-right: 1px dashed var(--color3)
+}
+
+.denom-labels {
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 5vh;
+
+}
+
+.denom-quantities {
+    background-attachment: #eaeaea;
+    display: flex;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+.bill-quantities {
+    display: flex;
+    width: 60%;
+}
+
+.coin-quantities {
+    display: flex;
+    width: 40%;
+}
+
+.graph-bill {
+
+}
+
+.graph-coin {
+
 }

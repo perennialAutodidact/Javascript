@@ -46,23 +46,77 @@
                 </div>
                 
                 <div class="coins">
-                    <div class="coin quarter">
+                    <div class="coin quarter quarter-size">
                         <div>25</div>
                     </div>
-                    <div class="coin dime">
+                    <div class="coin dime dime-size">
                         <div>10</div>
                     </div>
-                    <div class="coin nickel">
+                    <div class="coin nickel nickel-size">
                         <div>5</div>
                     </div>
-                    <div class="coin penny">
+                    <div class="coin penny penny-size">
                         <div>1</div>
                     </div>
                 </div>
             </div>
 
             <div id="submit">Enter</div>
-            
+        </div>
+
+        <div class="section" id="display">
+            <div class="payment">
+                <h1>Payment</h1>
+                <div class="labels">
+                    <div class="graph">
+                        <div class="graph-col" id="col-hundred"></div>
+                        <div class="graph-col" id="col-fifty"></div>
+                        <div class="graph-col" id="col-twenty"></div>
+                        <div class="graph-col" id="col-ten"></div>
+                        <div class="graph-col" id="col-five"></div>
+                        <div class="graph-col" id="col-one"></div>
+                        <div class="graph-col" id="col-quarter"></div>
+                        <div class="graph-col" id="col-dime"></div>
+                        <div class="graph-col" id="col-nickel"></div>
+                        <div class="graph-col" id="col-penny"></div>
+                    </div>
+
+                    <div class="denom-labels">
+                        <div class="bill-labels">
+                            <div class="bill-label" id="bill-label-hundred">Hundred</div>
+                            <div class="bill-label" id="bill-label-fifty">Fifty</div>
+                            <div class="bill-label" id="bill-label-twenty">Twenty</div>
+                            <div class="bill-label" id="bill-label-ten">Ten</div>
+                            <div class="bill-label" id="bill-label-five">Five</div>
+                            <div class="bill-label" id="bill-label-one">One</div>
+                        </div>
+                        <div class="coin-labels">
+                            <div class="coin-label" id="coin-label-quarter">Quarter</div>
+                            <div class="coin-label" id="coin-label-dime">Dime</div>
+                            <div class="coin-label" id="coin-label-nickel">Nickel</div>
+                            <div class="coin-label" id="coin-label-penny">Penny</div>
+                        </div>
+                    </div>
+
+                    <div class="denom-quantities">
+                        <div class="bill-quantities">
+                            <div class="bill-label" id="bill-quantity-hundred">0</div>
+                            <div class="bill-label" id="bill-quantity-fifty">0</div>
+                            <div class="bill-label" id="bill-quantity-twenty">0</div>
+                            <div class="bill-label" id="bill-quantity-ten">0</div>
+                            <div class="bill-label" id="bill-quantity-five">0</div>
+                            <div class="bill-label" id="bill-quantity-one">0</div>
+                        </div>
+                        <div class="coin-quantities">
+                            <div class="coin-label" id="coin-quantity-quarter">0</div>
+                            <div class="coin-label" id="coin-quantity-dime">0</div>
+                            <div class="coin-label" id="coin-quantity-nickel">0</div>
+                            <div class="coin-label" id="coin-quantity-penny">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="change-due"></div>
         </div>
     </div>
 
