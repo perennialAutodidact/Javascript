@@ -271,13 +271,12 @@ body {
 .graph-item {
     height: 10%;
     margin-top: 2px;
-    transition: all 10 ease-in-out;
+    opacity: 0;
+    transform: scale(0);
+    transition: all .3s ease-in-out;
     width: 80%;
 }
 
-.item-hidden {
-    opacity: 0;
-}
 
 
 .graph-coin {

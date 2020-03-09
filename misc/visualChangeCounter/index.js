@@ -30,21 +30,27 @@ class Graph {
     }
 
     addItem(column){
-        console.log(`column: ${column}`);
-        
         let item  = document.createElement('div'),
             denom = column.dataset.denom,
-            coins = ['quarter', 'dime', 'nickel', 'penny'];
+            coins = ['quarter', 'dime', 'nickel', 'penny'],
+            label = document.querySelector(`#quantity-${denom}`)
         
-            item.classList.add('item-hidden');
         item.classList.add('graph-item', denom);
         if(coins.includes(denom)){
             item.classList.add('graph-coin', `graph-${denom}`)
         }
-        item.classList.remove('item-hidden');
+
+        setTimeout(() => {
+            item.style.opacity = 1;
+            item.style.transform = 'scale(1)';
+        }, 10)
         
         item.dataset.value = column.dataset.value;
-        column.prepend(item);
+        column.append(item);
+
+        console.log(label.innerText++);
+        
+        // label.innerText = parseInt(label.innerText)++;
     }
 
 }
