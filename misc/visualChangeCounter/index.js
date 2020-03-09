@@ -14,14 +14,32 @@ const triggerAddItem = (event) => {
             denom = event.target.parentElement.dataset.denom;
         }
         column = document.querySelector(`.payment #col-${denom}`)
-        console.log(`column: `, column);
         
         paymentGraph.addItem(column);
     }
 }
 
-currencyLegend.addEventListener('click', triggerAddItem, false);
+const triggerRemoveItem = (event) => {
+    let item = event.target,
+        denom = event.target.parentElement.dataset.denom,
+        label = document.querySelector(`#quantity-${denom}`);
 
+    if(item.classList.contains('graph-item')){
+        item.removeEventListener('click', triggerRemoveItem)
+        item.style.opacity = 0;
+        item.style.transform = 'scale(0)';  
+
+        
+        setTimeout(() => {
+            item.remove();
+            label.innerText--;
+        },100)
+    }
+    
+}
+
+currencyLegend.addEventListener('click', triggerAddItem);
+// paymentGraph.addEventListener('click', triggerRemoveItem);
 class Graph {
     constructor(container, name) {
         this.container = container;
@@ -48,9 +66,8 @@ class Graph {
         item.dataset.value = column.dataset.value;
         column.append(item);
 
-        console.log(label.innerText++);
+        label.innerText++;
         
-        // label.innerText = parseInt(label.innerText)++;
     }
 
 }
@@ -63,21 +80,7 @@ let columnFifty = document.querySelector('.payment #col-fifty'),
 
 let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
 
-paymentGraph.addItem(columnFifty)
-paymentGraph.addItem(columnFifty)
-paymentGraph.addItem(columnFifty)
-paymentGraph.addItem(columnFifty)
-paymentGraph.addItem(columnFifty)
-paymentGraph.addItem(columnQuarter)
-paymentGraph.addItem(columnQuarter)
-paymentGraph.addItem(columnQuarter)
-paymentGraph.addItem(columnDime)
-paymentGraph.addItem(columnDime)
-paymentGraph.addItem(columnNickel)
-paymentGraph.addItem(columnNickel)
-paymentGraph.addItem(columnPenny)
-
-console.log(paymentGraph.columns);
+paymentGraph.container.addEventListener('click', triggerRemoveItem);
 
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
