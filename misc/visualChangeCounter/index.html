@@ -65,7 +65,7 @@
         </div>
 
         <div class="section" id="display">
-            <h1>Payment</h1>
+            <h2>Payment:</h2>
             <div class="payment">
                 <div class="labels">
                     <div class="graph">
@@ -101,23 +101,74 @@
 
                     <div class="denom-quantities">
                         <div class="bill-quantities">
-                            <div class="bill-label" id="quantity-hundred">0</div>
-                            <div class="bill-label" id="quantity-fifty">0</div>
-                            <div class="bill-label" id="quantity-twenty">0</div>
-                            <div class="bill-label" id="quantity-ten">0</div>
-                            <div class="bill-label" id="quantity-five">0</div>
-                            <div class="bill-label" id="quantity-one">0</div>
+                            <div class="bill-label quantity-label" id="quantity-hundred">0</div>
+                            <div class="bill-label quantity-label" id="quantity-fifty">0</div>
+                            <div class="bill-label quantity-label" id="quantity-twenty">0</div>
+                            <div class="bill-label quantity-label" id="quantity-ten">0</div>
+                            <div class="bill-label quantity-label" id="quantity-five">0</div>
+                            <div class="bill-label quantity-label" id="quantity-one">0</div>
                         </div>
                         <div class="coin-quantities">
-                            <div class="coin-label" id="quantity-quarter">0</div>
-                            <div class="coin-label" id="quantity-dime">0</div>
-                            <div class="coin-label" id="quantity-nickel">0</div>
-                            <div class="coin-label" id="quantity-penny">0</div>
+                            <div class="coin-label quantity-label" id="quantity-quarter">0</div>
+                            <div class="coin-label quantity-label" id="quantity-dime">0</div>
+                            <div class="coin-label quantity-label" id="quantity-nickel">0</div>
+                            <div class="coin-label quantity-label" id="quantity-penny">0</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="change-due"></div>
+            <h2>Change Due:</h2>
+            <div class="change-due">
+                <div class="labels">
+                    <div class="graph">
+                        <div class="graph-col" id="col-hundred" data-denom="hundred" data-value=100></div>
+                        <div class="graph-col" id="col-fifty" data-denom="fifty" data-value=50></div>
+                        <div class="graph-col" id="col-twenty" data-denom="twenty" data-value=20></div>
+                        <div class="graph-col" id="col-ten" data-denom="ten" data-value=10></div>
+                        <div class="graph-col" id="col-five" data-denom="five" data-value=5></div>
+                        <div class="graph-col" id="col-one" data-denom="one" data-value=1></div>
+
+                        <div class="graph-col" id="col-quarter" data-denom="quarter" data-value=.25></div>
+                        <div class="graph-col" id="col-dime" data-denom="dime" data-value=.1></div>
+                        <div class="graph-col" id="col-nickel" data-denom="nickel" data-value=.05></div>
+                        <div class="graph-col" id="col-penny" data-denom="penny" data-value=.01></div>
+                    </div>
+
+                    <div class="denom-labels">
+                        <div class="bill-labels">
+                            <div class="bill-label" id="bill-label-hundred">Hundred</div>
+                            <div class="bill-label" id="bill-label-fifty">Fifty</div>
+                            <div class="bill-label" id="bill-label-twenty">Twenty</div>
+                            <div class="bill-label" id="bill-label-ten">Ten</div>
+                            <div class="bill-label" id="bill-label-five">Five</div>
+                            <div class="bill-label" id="bill-label-one">One</div>
+                        </div>
+                        <div class="coin-labels">
+                            <div class="coin-label" id="coin-label-quarter">Quarter</div>
+                            <div class="coin-label" id="coin-label-dime">Dime</div>
+                            <div class="coin-label" id="coin-label-nickel">Nickel</div>
+                            <div class="coin-label" id="coin-label-penny">Penny</div>
+                        </div>
+                    </div>
+
+                    <div class="denom-quantities">
+                        <div class="bill-quantities">
+                            <div class="bill-label quantity-label" id="quantity-hundred">0</div>
+                            <div class="bill-label quantity-label" id="quantity-fifty">0</div>
+                            <div class="bill-label quantity-label" id="quantity-twenty">0</div>
+                            <div class="bill-label quantity-label" id="quantity-ten">0</div>
+                            <div class="bill-label quantity-label" id="quantity-five">0</div>
+                            <div class="bill-label quantity-label" id="quantity-one">0</div>
+                        </div>
+                        <div class="coin-quantities">
+                            <div class="coin-label quantity-label" id="quantity-quarter">0</div>
+                            <div class="coin-label quantity-label" id="quantity-dime">0</div>
+                            <div class="coin-label quantity-label" id="quantity-nickel">0</div>
+                            <div class="coin-label quantity-label" id="quantity-penny">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

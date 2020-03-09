@@ -2,16 +2,19 @@
     /* RGB */
     --color1: rgba(0, 0, 0, 1);
     --color2: rgba(12, 24, 33, 1);
-    --color3: rgba(27, 42, 65, 1);
-    --color4: rgba(50, 74, 95, 1);
+    --color3: rgb(59, 91, 136);
+    --color4: rgb(119, 149, 175);
     --color5: rgba(204, 201, 220, 1);
 
-    --bill-hundred-bg: rgb(34, 55, 22);
+    --font-color1: rgb(24, 37, 49);
+    --font-color2: rgb(70, 87, 102);
+
+    --bill-hundred-bg: rgb(50, 80, 32);
     --bill-fifty-bg: rgb(67, 109, 44);
-    --bill-twenty-bg: rgb(100, 163, 65);
-    --bill-ten-bg: rgb(134, 205, 96);
-    --bill-five-bg: rgb(170, 219, 143);
-    --bill-one-bg: rgb(206, 234, 191);
+    --bill-twenty-bg: rgb(76, 138, 43);
+    --bill-ten-bg: rgb(109, 179, 71);
+    --bill-five-bg: rgb(154, 219, 119);
+    --bill-one-bg: rgb(179, 233, 150);
 
     --bill-hundred-border: rgb(15, 32, 5);
     --bill-fifty-border: var(--bill-hundred-bg);
@@ -145,6 +148,7 @@ body {
     justify-content: center;
 }
 
+
 .coin {
     align-items: center;
     border-radius: 50%;
@@ -208,19 +212,29 @@ body {
 
 #display {
     background-color: var(--color4);
-    color: var(--color);
+    color: var(--font-color1);
     display: flex;
     height: 100vh;
     width: 70vw;
 }
 
-.payment {
+#display h2 {
+    color: var(--font-color1);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 4px;
+}
+
+.payment, .change-due {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 40vh;
+    height: 30vh;
     max-height: 40vh;
     width: 100%;
+}
+
+.payment {
+    margin-bottom: 10vh;
 }
 
 .labels {
@@ -232,6 +246,7 @@ body {
 }
 
 .bill-labels {
+    color: var(--font-color2);
     display: flex;
     width: 60%;
 }
@@ -242,6 +257,7 @@ body {
 }
 
 .coin-labels {
+    color: var(--font-color2);
     display: flex;
     width: 40%;
 }
@@ -249,6 +265,11 @@ body {
 .coin-label {
     text-align: center;
     width: 25%;
+}
+
+.quantity-label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--font-color1);
 }
 
 .graph {
