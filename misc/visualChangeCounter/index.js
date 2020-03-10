@@ -4,6 +4,8 @@ let randomTotal    = document.querySelector('.random-total'),
     currencyLegend = document.querySelector('.currency-legend'),
     submit         = document.querySelector('#submit');
 
+const denomNames = ['hundred', 'fifty', 'twenty', 'ten', 'five', 'one', 'quarter', 'dime', 'nickel', 'penny']
+
 const triggerAddItem = (event) => {
     let column,
         denom;
@@ -175,37 +177,58 @@ const makeChange = () => {
         
         for(i = 0; i < graphItems.length; i++){
             graphItem = graphItems[i];
-            
             totalPaid += parseFloat(graphItem.dataset.value);
         }
         
         changeDue = parseFloat(totalPaid - totalDue);
-        
-        console.log(`totalDue: ${totalDue}`);
-        console.log(`totalPaid: ${totalPaid}`);
-        console.log(`change: ${changeDue}`);
+
+        change['changeDue'] = Math.round(changeDue * 100) / 100;
 
         while(count < denoms.length){
             denom = denoms[count];
-            change[denom] = 0;
+            change[denom] = {}
+            change[denom]['quantity'] = 0;
+            change[denom]['denom'] = denomNames[count];
 
-            // console.log(`denom: ${denoms}`);
-            
-            // console.log(`changeDue-denom: ${denom-changeDue}`);
             while(changeDue - denom >= 0){
                 changeDue = Math.round(parseFloat(changeDue - denom) * 100) / 100;
-                change[denom] += 1;
+                change[denom]['quantity'] += 1;
+                
             }
             count++;
         }
 
-        console.log(change);
+        return change
         
 }
+
+
 
 let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
 let changeGraph  = new Graph(document.querySelector('.change-due'), 'change');
 
 paymentGraph.container.addEventListener('click', triggerRemoveItem);
 
-submit.addEventListener('click', makeChange);
+submit.addEventListener('click', () => {
+    let change = makeChange(),
+        keys   = Object.keys(change),
+        key, denom,
+        i,
+        column;
+
+    console.log(change);
+    
+    for(i = 0; i < keys.length; i++){
+        key = keys[i];
+
+        console.log(key);
+        
+        denom = change[key].denom;
+        column = document.querySelector(`.change-due #col-${denom}`)
+        
+        // changeGraph.addItem(column, number of items)
+        
+    }
+
+    
+});
