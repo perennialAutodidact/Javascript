@@ -269,6 +269,7 @@ body {
 
 .quantity-label {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
     color: var(--font-color1);
 }
 
@@ -298,8 +299,6 @@ body {
     transition: all .3s ease-in-out;
     width: 80%;
 }
-
-
 
 .graph-coin {
     border-radius: 50%;

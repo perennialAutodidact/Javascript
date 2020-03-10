@@ -1,7 +1,8 @@
 let randomTotal    = document.querySelector('.random-total'),
     tillMessage    = document.querySelector('.till .message'),
     totalInput     = document.querySelector('.till input'),
-    currencyLegend = document.querySelector('.currency-legend');
+    currencyLegend = document.querySelector('.currency-legend'),
+    submit         = document.querySelector('#submit');
 
 const triggerAddItem = (event) => {
     let column,
@@ -27,19 +28,17 @@ const triggerRemoveItem = (event) => {
     if(item.classList.contains('graph-item')){
         item.removeEventListener('click', triggerRemoveItem)
         item.style.opacity = 0;
-        item.style.transform = 'scale(0)';  
+        item.style.transform = 'scale(0)';
 
-        
         setTimeout(() => {
             item.remove();
             label.innerText--;
         },100)
     }
-    
 }
 
 currencyLegend.addEventListener('click', triggerAddItem);
-// paymentGraph.addEventListener('click', triggerRemoveItem);
+
 class Graph {
     constructor(container, name) {
         this.container = container;
@@ -77,10 +76,6 @@ let columnFifty = document.querySelector('.payment #col-fifty'),
     columnDime = document.querySelector('.payment #col-dime'),
     columnNickel = document.querySelector('.payment #col-nickel'),
     columnPenny = document.querySelector('.payment #col-penny');
-
-let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
-
-paymentGraph.container.addEventListener('click', triggerRemoveItem);
 
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
@@ -163,17 +158,54 @@ totalInput.addEventListener('input', (e) => {
     totalInput.value = `${newValue}`;
 });
 
-// collects number of each
-// denomination of money that 
-// the user has selected for payment
-const compilePayment = () => {
+const makeChange = () => {
+    let totalDue     = totalInput.value,
+        paymentGraph = document.querySelector('.payment'),
+        graphItems   = paymentGraph.querySelectorAll('.graph-item'),
+        denoms       = [100.0, 50.0, 20.0, 10.0, 5.0, 1.0, 0.25, 0.1, 0.05, 0.01],
+        totalPaid    = 0.0,
+        changeDue    = 0.0,
+        graphItem,
+        denom,
+        change = {},
+        count = 0;
 
+        totalDue = totalDue.replace("$ ", '');
+        totalDue = parseFloat(totalDue.replace(",", ''));
+        
+        for(i = 0; i < graphItems.length; i++){
+            graphItem = graphItems[i];
+            
+            totalPaid += parseFloat(graphItem.dataset.value);
+        }
+        
+        changeDue = parseFloat(totalPaid - totalDue);
+        
+        console.log(`totalDue: ${totalDue}`);
+        console.log(`totalPaid: ${totalPaid}`);
+        console.log(`change: ${changeDue}`);
+
+        while(count < denoms.length){
+            denom = denoms[count];
+            change[denom] = 0;
+
+            // console.log(`denom: ${denoms}`);
+            
+            // console.log(`changeDue-denom: ${denom-changeDue}`);
+            while(changeDue - denom >= 0){
+                changeDue = Math.round(parseFloat(changeDue - denom) * 100) / 100;
+                change[denom] += 1;
+            }
+            count++;
+        }
+
+        console.log(change);
+        
 }
 
-// Calculate change due
-// returns object with quantities 
-// for each denomination
-// '$ 24.56
-const makeChange = (amountDue, amountPaid) => {
+let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
+let changeGraph  = new Graph(document.querySelector('.change-due'), 'change');
 
-}
+paymentGraph.container.addEventListener('click', triggerRemoveItem);
+
+submit.addEventListener('click', makeChange);
