@@ -17,8 +17,9 @@ const triggerAddItem = (event) => {
             denom = event.target.parentElement.dataset.denom;
         }
         column = document.querySelector(`.payment #col-${denom}`)
-        
+
         paymentGraph.addItem(column);
+        updateCurrentPayment();
     }
 }
 
@@ -45,10 +46,12 @@ class Graph {
     constructor(container, name) {
         this.container = container;
         this.name = name;
-        this.columns = this.container.querySelectorAll('.graph .graph-col')
+        this.columns = this.container.querySelectorAll('.graph .graph-col');
+        this.currentPayment = 0;
     }
 
     addItem(column){
+        console.log(column);
         let item  = document.createElement('div'),
             denom = column.dataset.denom,
             coins = ['quarter', 'dime', 'nickel', 'penny'],
@@ -63,6 +66,17 @@ class Graph {
             item.style.opacity = 1;
             item.style.transform = 'scale(1)';
         }, 10)
+        
+        console.log(column.dataset.value);
+        
+        console.log(`current: ${this.currentPayment}`);
+        
+        this.currentPayment = parseFloat(this.currentPayment + parseFloat(column.dataset.value))
+        this.currentPayment = Math.round(this.currentPayment * 100) / 100;
+
+
+        console.log(`this.currentPayment: ${this.currentPayment}`);
+        
         
         item.dataset.value = column.dataset.value;
         column.append(item);
@@ -81,7 +95,7 @@ let columnFifty = document.querySelector('.payment #col-fifty'),
 
 // Takes in string from till input and
 // returns total in proper format => $ xxx,xxx,xxx.xx
-const updateTotal = (total, char) => {
+const formatTotal = (total, char) => {
 
     let isDigit = new RegExp(/([0-9])/),
         nonDigit = new RegExp(/([\D])/g),
@@ -147,7 +161,7 @@ totalInput.addEventListener('input', (e) => {
     }
     
     if(digit.test(newChar) && newChar != '$'){
-        newValue = updateTotal(totalInput.value, newChar);
+        newValue = formatTotal(totalInput.value, newChar);
     } else {
         if(newChar == '$' || '.'){
             newValue = totalInput.value.replace(newChar, '')
@@ -160,6 +174,8 @@ totalInput.addEventListener('input', (e) => {
     totalInput.value = `${newValue}`;
 });
 
+// Subtracts amount owed from amount paid
+// and returns an object with info about change due
 const makeChange = () => {
     let totalDue     = totalInput.value,
         paymentGraph = document.querySelector('.payment'),
@@ -188,6 +204,7 @@ const makeChange = () => {
             denom = denoms[count];
             change[denom] = {}
             change[denom]['quantity'] = 0;
+
             change[denom]['denom'] = denomNames[count];
 
             while(changeDue - denom >= 0){
@@ -199,10 +216,13 @@ const makeChange = () => {
         }
 
         return change
-        
 }
 
+const updateCurrentPayment = () => {
+    let currentPaymentDisplay = document.querySelector('#current-payment');
 
+    currentPaymentDisplay.innerText = `$ ${paymentGraph.currentPayment}`
+}
 
 let paymentGraph = new Graph(document.querySelector('.payment'), 'payment');
 let changeGraph  = new Graph(document.querySelector('.change-due'), 'change');
